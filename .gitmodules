@@ -1,0 +1,18 @@
+[submodule "roles/geerlingguy.mysql"]
+	path = roles/geerlingguy.mysql
+	url = https://github.com/geerlingguy/ansible-role-mysql
+[submodule "roles/n0emis.base"]
+	path = roles/n0emis.base
+	url = https://github.com/n0emis/ansible-role-base
+[submodule "roles/gantsign.oh-my-zsh"]
+	path = roles/gantsign.oh-my-zsh
+	url = https://github.com/gantsign/ansible-role-oh-my-zsh/
+[submodule "roles/chrnie.icinga2"]
+	path = roles/chrnie.icinga2
+	url = https://github.com/n0emis/ansible-role-icinga2
+[submodule "roles/geerlingguy.nginx"]
+	path = roles/geerlingguy.nginx
+	url = https://github.com/geerlingguy/ansible-role-nginx
+[submodule "roles/geerlingguy.php"]
+	path = roles/geerlingguy.php
+	url = https://github.com/geerlingguy/ansible-role-php

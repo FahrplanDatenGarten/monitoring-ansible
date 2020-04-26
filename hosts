@@ -1,0 +1,8 @@
+[master]
+#icinga-b.int.goe.de.n0emis.eu
+
+[master:children]
+primary
+
+[primary]
+icinga-a.int.goe.de.n0emis.eu

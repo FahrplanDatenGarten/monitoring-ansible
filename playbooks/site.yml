@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - n0emis.base
+    - gantsign.oh-my-zsh
+  tags: base
+
+- hosts: primary
+  become: yes
+  roles:
+    - geerlingguy.mysql
+  tags: mysql
+
+- hosts: master
+  become: yes
+  roles:
+    - geerlingguy.php
+    - geerlingguy.nginx
+  tags: php
+
+- hosts: master
+  become: yes
+  roles:
+    - chrnie.icinga2
+  tags: icinga

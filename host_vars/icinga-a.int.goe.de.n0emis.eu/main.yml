@@ -1,0 +1,4 @@
+---
+#mysql_replication_master: 'icinga-b.int.goe.de.n0emis.eu'
+#mysql_server_id: "1"
+icinga2_role: master
