@@ -5,5 +5,8 @@
 - name: configure galera
   include_tasks: configure_galera.yml
 
+- name: create databases
+  include_tasks: databases.yml
+
 - name: add users
   include_tasks: users.yml

@@ -12,3 +12,7 @@ mysql_users:
     host: "localhost"
     password: "foobar2342"
     priv: "foo.*:ALL"
+
+mysql_databases:
+  - name: "foo"
+  - name: "foobar2"
