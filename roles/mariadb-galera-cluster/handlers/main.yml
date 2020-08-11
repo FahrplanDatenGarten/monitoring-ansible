@@ -2,5 +2,5 @@
   systemd:
     name: "mysql.service"
     state: restarted
-  throttle: 1
+  run_once: yes
   when: _galera_cluster_configured.stat.exists

@@ -6,5 +6,6 @@
     password: "{{ item.password }}"
     priv: "{{ item.priv | default('*.*:USAGE') }}"
     state: "{{ item.state | default('present') }}"
+  run_once: yes
   loop: "{{ mysql_users }}"
   no_log: true
