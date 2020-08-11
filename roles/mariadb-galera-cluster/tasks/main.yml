@@ -1,0 +1,9 @@
+---
+- name: install mariadb
+  include_tasks: install.yml
+
+- name: configure galera
+  include_tasks: configure_galera.yml
+
+- name: add users
+  include_tasks: users.yml

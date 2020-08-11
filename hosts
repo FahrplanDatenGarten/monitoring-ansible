@@ -1,8 +1,10 @@
 [master]
 #icinga-b.int.goe.de.n0emis.eu
 
-[master:children]
+[master]
 primary
 
-[primary]
-icinga-a.int.goe.de.n0emis.eu
+[db]
+galera-1.int.sig.de.labcode.de galera_primary_host=yes galera_wsrep_node_address=10.151.4.17
+galera-2.int.sig.de.labcode.de galera_wsrep_node_address=10.151.4.16
+galera-3.int.sig.de.labcode.de galera_wsrep_node_address=10.151.4.18

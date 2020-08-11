@@ -1,0 +1,37 @@
+---
+- name: checking if galera cluster setup
+  stat:
+    path: "/etc/galera_cluster_configured"
+  register: "_galera_cluster_configured"
+
+- name: Add galera config to mariadb
+  template:
+    src: "etc/mysql/conf.d/galera.cnf.j2"
+    dest: "/etc/mysql/conf.d/galera.cnf"
+  notify: restart mariadb
+
+- block:
+    - name: stop mariadb service on hosts
+      service:
+        name: "mysql"
+        state: "stopped"
+      become: true
+
+    - name: bootstrap galera cluster
+      command: "/usr/bin/galera_new_cluster"
+      become: true
+      when: galera_primary_host is defined and galera_primary_host
+
+    - name: restart other mariadbs to join galera cluster
+      service:
+        name: "mysql"
+        state: "restarted"
+      become: true
+      when: galera_primary_host is not defined
+
+    - name: mark galera cluster as configured
+      file:
+        path: "/etc/galera_cluster_configured"
+        state: "touch"
+      become: true
+  when: not _galera_cluster_configured.stat.exists

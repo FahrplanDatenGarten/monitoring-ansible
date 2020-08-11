@@ -1,0 +1,6 @@
+- name: restart mariadb
+  systemd:
+    name: "mysql.service"
+#    state: restarted
+  throttle: 1
+  when: _galera_cluster_configured.stat.exists

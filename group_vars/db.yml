@@ -1,0 +1,14 @@
+mysql_root_username: "root"
+mysql_root_password: "{{ lookup('passwordstore', 'mysql/root') }}"
+mysql_root_password_update: false
+
+galera_cluster_bind_address: "0.0.0.0"
+galera_wsrep_cluster_name: "monitoring-cluster"
+galera_wsrep_cluster_address: "{% for host in ansible_play_batch %}{{ hostvars[host].inventory_hostname }}{% if loop.index != loop.length %},{% endif %}{% endfor %}"
+galera_wsrep_node_name: "{{ ansible_fqdn }}"
+
+mysql_users:
+  - name: "foo"
+    host: "localhost"
+    password: "foobar2342"
+    priv: "foo.*:ALL"
