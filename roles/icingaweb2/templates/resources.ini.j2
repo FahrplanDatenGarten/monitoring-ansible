@@ -1,0 +1,25 @@
+[icingaweb2ido]
+type      = db
+db        = mysql
+host      = {{ icingaweb2_db_host }}
+port      = 3306
+username  = {{ icingaweb2_db_user }}
+password  = {{ icingaweb2_db_password }}
+dbname    = {{ icingaweb2_db_name }}
+
+[icinga2ido]
+type      = db
+db        = mysql
+host      = {{ icinga2_ido_host }}
+port      = 3306
+username  = {{ icinga2_ido_user }}
+password  = {{ icinga2_ido_password }}
+dbname    = {{ icinga2_ido_name }}
+
+[auth_ldap]
+type        = ldap
+hostname    = {{ icingaweb2_ldap_server }}
+port        = 389
+root_dn     = "ou=People,{{ icingaweb2_ldap_dn}}"
+bind_dn     = "cn=admin,{{ icingaweb2_ldap_dn }}"
+bind_pw     = "{{ icingaweb2_ldap_password }}"

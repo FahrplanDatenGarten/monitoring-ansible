@@ -1,0 +1,8 @@
+[auth_ldap]
+resource = "auth_ldap"
+user_backend = "auth_ldap"
+group_class = "groupOfNames"
+group_name_attribute = "cn"
+group_member_attribute = "member"
+backend = "ldap"
+base_dn = "ou=Groups,{{ icingaweb2_ldap_dn }}"

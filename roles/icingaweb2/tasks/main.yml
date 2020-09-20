@@ -1,0 +1,48 @@
+---
+- name: Install icingaweb2 dependencies
+  apt:
+    name: gnupg
+    state: present
+
+- name: Add icingaweb2 repo key
+  apt_key:
+    url: "{{ icingaweb2_apt_repo.gpgkey }}"
+    state: present
+
+- name: Add icingaweb2 repository
+  apt_repository:
+    repo: "{{ icingaweb2_apt_repo.repo }}"
+    state: present
+    update_cache: yes
+
+- name: Install icingaweb2 basic packages
+  apt:
+    name: "{{ icingaweb2_packages_debian }}"
+    state: "present"
+
+- name: Create monitoring config directory
+  file:
+    dest: "/etc/icingaweb2/modules/monitoring/"
+    state: directory
+
+- name: Copy Icingaweb config files
+  template:
+    dest: "/etc/icingaweb2/{{ item }}.ini"
+    src: "{{ item }}.ini.j2"
+  loop:
+    - "config"
+    - "resources"
+    - "authentication"
+    - "groups"
+    - "roles"
+    - "modules/monitoring/backends"
+    - "modules/monitoring/commandtransports"
+
+- name: Import icingaweb2 schema
+  import_tasks: database.yml
+
+- name: Enable icingaweb modules
+  command: "icingacli module enable {{ item }}"
+  loop:
+    - monitoring
+

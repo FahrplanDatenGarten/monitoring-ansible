@@ -1,0 +1,46 @@
+---
+- name: Install icinga2 dependencies
+  apt:
+    name: gnupg
+    state: present
+
+- name: Add icinga2 repo key
+  apt_key:
+    url: "{{ icinga2_apt_repo.gpgkey }}"
+    state: present
+
+- name: Add icinga2 repository
+  apt_repository:
+    repo: "{{ icinga2_apt_repo.repo }}"
+    state: present
+    update_cache: yes
+
+- name: Install icinga2 basic packages
+  apt:
+    name: "{{ icinga2_packages_debian }}"
+    state: "present"
+
+- name: Import icinga2 schema
+  import_tasks: ido-mysql.yml
+
+- name: Enable required icinga features
+  command: "icinga2 feature enable {{ item }}"
+  register: enable_feature
+  changed_when: "'Enabling feature' in enable_feature.stdout"
+  loop: "{{ icinga2_features }}"
+  notify: restart icinga2
+
+- name: Set up the icinga2 api
+  command: "icinga2 api setup"
+  register: api_setup
+  changed_when: "'Generating new CSR' in api_setup.stdout"
+  notify: restart icinga2
+
+- name: Copy Icinga config files
+  template:
+    dest: "/etc/icinga2/{{ item }}"
+    src: "{{ item }}.j2"
+  loop:
+    - "features-available/ido-mysql.conf"
+    - "conf.d/api-users.conf"
+  notify: restart icinga2

@@ -19,15 +19,21 @@
     - mariadb-galera-cluster
   tags: db
 
-- hosts: master
+- hosts: primary
   become: yes
   roles:
     - geerlingguy.php
     - geerlingguy.nginx
   tags: php
 
-- hosts: master
+- hosts: primary
   become: yes
   roles:
-    - chrnie.icinga2
+    - icinga2-primary
   tags: icinga
+
+- hosts: primary
+  become: yes
+  roles:
+    - icingaweb2
+  tags: icingaweb,web

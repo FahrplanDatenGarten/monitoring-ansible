@@ -8,11 +8,13 @@ galera_wsrep_cluster_address: "{% for host in ansible_play_batch %}{{ hostvars[h
 galera_wsrep_node_name: "{{ ansible_fqdn }}"
 
 mysql_users:
-  - name: "foo"
-    host: "localhost"
-    password: "foobar2342"
-    priv: "foo.*:ALL"
+  - name: "icingaweb"
+    password: "icingaweb"
+    priv: "icingaweb.*:ALL"
+  - name: "icinga"
+    password: "icinga"
+    priv: "icinga.*:ALL"
 
 mysql_databases:
-  - name: "foo"
-  - name: "foobar2"
+  - name: "icingaweb"
+  - name: "icinga"

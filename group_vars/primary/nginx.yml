@@ -1,0 +1,36 @@
+---
+nginx_vhost_template: "vhost.j2"
+nginx_remove_default_vhost: true
+nginx_user: www-data
+nginx_vhosts:
+  - listen: "80"
+    server_name: "_"
+    root: "/usr/share/icingaweb2/public"
+    index: "index.php"
+    state: "present"
+    template: "{{ nginx_vhost_template }}"
+    filename: "icingaweb2.conf"
+    extra_parameters: |
+      location ~ ^/icingaweb2/index\.php(.*)$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /usr/share/icingaweb2/public/index.php;
+        fastcgi_param ICINGAWEB_CONFIGDIR /etc/icingaweb2;
+        fastcgi_param REMOTE_USER $remote_user;
+      }
+
+      location ~ ^/icingaweb2(.+)? {
+        alias /usr/share/icingaweb2/public;
+        index index.php;
+        try_files $1 $uri $uri/ /icingaweb2/index.php$is_args$args;
+      }
+
+      location = / {
+        return 307 /icingaweb2;
+      }
+
+php_webserver_daemon: nginx
+php_enable_php_fpm: true
+php_use_managed_ini: true
+php_default_version_debian: "7.3"

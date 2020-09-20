@@ -1,0 +1,33 @@
+---
+icinga2_ido_host: "localhost"
+icinga2_ido_port: 3306
+icinga2_ido_user: "icinga"
+icinga2_ido_password: "icinga"
+icinga2_ido_name: "icinga"
+icinga2_web_api_password: "bea11beb7b810ea9ce6ea"
+
+icinga2_features:
+  - "ido-mysql"
+  - "checker"
+  - "api"
+  - "notification"
+  - "mainlog"
+
+## NOT IMPLEMENTED YET
+
+icinga2_ca_host: "{{ icinga2_ido_host }}"
+
+icinga2_zones:
+  master:
+    endpoints:
+      - icinga-b.int.goe.de.n0emis.eu
+      #- icinga-a.int.goe.de.n0emis.eu
+  director-global:
+    global: true
+  global-templates:
+    global: true
+
+icinga2_endpoints:
+  icinga-a.int.goe.de.n0emis.eu:
+    host: icinga-a.int.goe.de.n0emis.eu
+

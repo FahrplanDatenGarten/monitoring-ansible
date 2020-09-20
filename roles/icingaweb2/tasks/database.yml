@@ -1,0 +1,24 @@
+---
+- name: Check DB schema version in MySQL
+  command:
+    mysql
+    -h {{ icingaweb2_db_host|quote }}
+    -u {{ icingaweb2_db_user|quote }}
+    -p{{ icingaweb2_db_password|quote }}
+    {{ icingaweb2_db_name|quote }}
+    -Ns -e "SHOW TABLES LIKE 'icingaweb_user'"
+  changed_when: False
+  register: table_exists
+
+- name: Import icingaweb2 schema
+  mysql_db:
+    login_host: "{{ icingaweb2_db_host }}"
+    login_port: "{{ icingaweb2_db_port }}"
+    login_user: "{{ icingaweb2_db_user }}"
+    login_password: "{{ icingaweb2_db_password }}"
+    name: "{{ icingaweb2_db_name }}"
+    target: /usr/share/icingaweb2/etc/schema/mysql.schema.sql
+    state: import
+  ignore_errors: yes
+  run_once: true
+  when: table_exists.stdout == ""
