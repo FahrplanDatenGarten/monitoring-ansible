@@ -9,3 +9,14 @@ object Service "cluster" {
 }
 
 {% endfor %}
+
+apply Service "ido-mysql" {
+    check_command = "ido"
+
+    vars.ido_type = "IdoMysqlConnection"
+    vars.ido_name = "ido-mysql" // the name defined in /etc/icinga2/features-enabled/ido-mysql.conf
+
+    command_endpoint = host.name
+
+    assign where host.zone == "primary"
+}
