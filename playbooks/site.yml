@@ -6,15 +6,8 @@
     - gantsign.oh-my-zsh
   tags: base
 
-- hosts: db
+- hosts: primary
   become: yes
-  pre_tasks:
-    - name: Add GPG keys for mariadb apt repository
-      apt_key:
-        url: "https://mariadb.org/mariadb_release_signing_key.asc"
-    - name: Add mariadb apt repository
-      apt_repository:
-        repo: "deb [arch=amd64] https://mirror.netcologne.de/mariadb/repo/10.5/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }} main"
   roles:
     - mariadb-galera-cluster
   tags: db

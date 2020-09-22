@@ -1,0 +1,20 @@
+---
+- name: "See if host is already configured"
+  stat:
+    path: /var/lib/icinga2/certs/ticket
+  register: icinga_ticket_file
+
+- name: "Generate ticket for host"
+  command: "icinga2 pki ticket --cn {{ ansible_fqdn }}"
+  delegate_to: "{{ icinga2_primary_config_endpoint }}"
+  register: icinga_ticket
+  when: not icinga_ticket_file.stat.exists
+
+- name: Get trusted cert from config host
+  command: "icinga2 pki save-cert --trustedcert /var/lib/icinga2/certs/trusted-parent.crt --host {{ icinga2_primary_config_endpoint }}"
+  when: not icinga_ticket_file.stat.exists
+
+- name: "Setup icinga2 node"
+  command: "icinga2 node setup --ticket {{ icinga_ticket.stdout }} --cn {{ ansible_fqdn }} --zone primary --accept-commands --accept-config --disable-confd --endpoint {{ icinga2_primary_config_endpoint }}  --parent_host {{ icinga2_primary_config_endpoint }} --parent_zone primary --trustedcert /var/lib/icinga2/certs/trusted-parent.crt"
+  notify: restart icinga2
+  when: not icinga_ticket_file.stat.exists

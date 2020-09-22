@@ -1,5 +1,4 @@
 mysql_root_username: "root"
-mysql_root_password: "{{ lookup('passwordstore', 'mysql/root') }}"
 mysql_root_password_update: false
 
 galera_cluster_bind_address: "0.0.0.0"
@@ -8,13 +7,13 @@ galera_wsrep_cluster_address: "{% for host in ansible_play_batch %}{{ hostvars[h
 galera_wsrep_node_name: "{{ ansible_fqdn }}"
 
 mysql_users:
-  - name: "icingaweb"
-    password: "icingaweb"
-    priv: "icingaweb.*:ALL"
-  - name: "icinga"
-    password: "icinga"
-    priv: "icinga.*:ALL"
+  - name: "{{ icingaweb2_db_user }}"
+    password: "{{ icingaweb2_db_password }}"
+    priv: "{{ icingaweb2_db_name }}.*:ALL"
+  - name: "{{ icinga2_ido_user }}"
+    password: "{{ icinga2_ido_password }}"
+    priv: "{{ icinga2_ido_name }}.*:ALL"
 
 mysql_databases:
   - name: "icingaweb"
-  - name: "icinga"
+  - name: "{{ icinga2_ido_name }}"

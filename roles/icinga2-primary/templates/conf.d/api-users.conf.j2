@@ -3,13 +3,13 @@
  */
 
 object ApiUser "root" {
-  password = "ea40337ca3da9666"
+  password = "{{ icinga2_api_root_password }}"
   // client_cn = ""
 
   permissions = [ "*" ]
 }
 
 object ApiUser "icingaweb2" {
-  password = "{{ icinga2_web_api_password }}" // Change this!
+  password = "{{ icinga2_api_web_password }}" // Change this!
   permissions = [ "status/query", "actions/*", "objects/modify/*", "objects/query/*" ]
 }

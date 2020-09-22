@@ -1,0 +1,24 @@
+{% for ep_name, ep in icinga2_endpoints.items() %}
+object Endpoint "{{ ep_name }}" {
+{% if ep.host is defined and ep_name != ansible_fqdn %}
+    host = "{{ ep.host }}"
+{% endif %}
+}
+
+{% endfor %}
+
+
+{% for zone_name, zone in icinga2_zones.items() %}
+object Zone "{{ zone_name }}" {
+    endpoints = [ "{{ zone.endpoints | join('", "') }}" ]
+}
+{% endfor %}
+
+
+object Zone "global-templates" {
+    global = true
+}
+
+object Zone "director-global" {
+    global = true
+}

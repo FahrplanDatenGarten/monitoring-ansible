@@ -1,7 +1,7 @@
 ---
 icingaweb2_db_host: localhost
+icingaweb2_db_port: 3306
 icingaweb2_db_user: icingaweb
-icingaweb2_db_password: icingaweb
 icingaweb2_db_name: icingaweb
 
 icingaweb2_ldap_dn: "dc=n0emis,dc=eu"

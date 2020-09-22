@@ -22,18 +22,30 @@
 
 - name: Import icinga2 schema
   import_tasks: ido-mysql.yml
+  when: ansible_fqdn == icinga2_primary_config_endpoint
+
+- name: Set up the host
+  command: "icinga2 node setup --master --disable-confd --zone primary --cn {{ ansible_fqdn }}"
+  args:
+    creates: "/var/lib/icinga2/certs/{{ ansible_fqdn }}.crt"
+  notify: restart icinga2
+  when: ansible_fqdn == icinga2_primary_config_endpoint
+
+- include_tasks: "add-host.yml"
+  when: ansible_fqdn != icinga2_primary_config_endpoint
+
+- name: Set up the icinga2 api
+  command: "icinga2 api setup"
+  register: api_setup
+  changed_when: "'Generating new CSR' in api_setup.stdout"
+  notify: restart icinga2
+  when: ansible_fqdn != icinga2_primary_config_endpoint
 
 - name: Enable required icinga features
   command: "icinga2 feature enable {{ item }}"
   register: enable_feature
   changed_when: "'Enabling feature' in enable_feature.stdout"
   loop: "{{ icinga2_features }}"
-  notify: restart icinga2
-
-- name: Set up the icinga2 api
-  command: "icinga2 api setup"
-  register: api_setup
-  changed_when: "'Generating new CSR' in api_setup.stdout"
   notify: restart icinga2
 
 - name: Copy Icinga config files
@@ -43,4 +55,10 @@
   loop:
     - "features-available/ido-mysql.conf"
     - "conf.d/api-users.conf"
+    - "zones.conf"
   notify: restart icinga2
+
+- name: Fix ping permissions
+  file:
+    dest: /bin/ping
+    mode: u+s

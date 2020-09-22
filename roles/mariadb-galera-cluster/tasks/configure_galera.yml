@@ -35,3 +35,10 @@
         state: "touch"
       become: true
   when: not _galera_cluster_configured.stat.exists
+
+- name: Ensure mariadb is started and enabled on boot.
+  service:
+    name: "mariadb"
+    state: "started"
+    enabled: yes
+  become: true
