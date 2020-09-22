@@ -1,0 +1,26 @@
+apply Service "ping4" {
+    check_command = "ping4"
+
+    // Check is executed on the master node
+    assign where host.address
+}
+
+apply Service "disk" {
+    check_command = "disk"
+
+    // Check is executed on the remote command endpoint
+    command_endpoint = host.vars.agent_endpoint
+
+    assign where host.vars.agent_endpoint
+}
+
+apply Service "agent-health" {
+    check_command = "cluster-zone"
+
+    display_name = "cluster-health-" + host.name
+
+    /* This follows the convention that the agent zone name is the FQDN which is the same as the host object name. */
+    vars.cluster_zone = host.name
+
+    assign where host.vars.agent_endpoint
+}

@@ -1,0 +1,7 @@
+{% for host in icinga2_zones.primary.endpoints %}
+object Host "{{ host }}" {
+    check_command = "hostalive"
+    address = "{{ host }}"
+}
+
+{% endfor %}

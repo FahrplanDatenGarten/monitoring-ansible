@@ -1,0 +1,11 @@
+{% for host in icinga2_zones.primary.endpoints %}
+object Service "cluster" {
+    check_command = "cluster"
+    check_interval = 5s
+    retry_interval = 1s
+
+    host_name = "{{ host }}"
+    command_endpoint = host_name
+}
+
+{% endfor %}

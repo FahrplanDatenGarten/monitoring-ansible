@@ -58,6 +58,21 @@
     - "zones.conf"
   notify: restart icinga2
 
+- name: Create zones.d directories
+  file:
+    state: directory
+    path: "/etc/icinga2/zones.d/{{ item.path  }}"
+  with_filetree: ../templates/icinga2/zones.d
+  when: ansible_fqdn == icinga2_primary_config_endpoint and item.state == 'directory'
+
+- name: Copy zones.d files
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/icinga2/zones.d/{{ item.path | replace('.j2', '') }}"
+  with_filetree: ../templates/icinga2/zones.d
+  notify: restart icinga2
+  when: ansible_fqdn == icinga2_primary_config_endpoint and item.state == 'file'
+
 - name: Fix ping permissions
   file:
     dest: /bin/ping
