@@ -3,7 +3,7 @@ mysql_root_password_update: false
 
 galera_cluster_bind_address: "0.0.0.0"
 galera_wsrep_cluster_name: "monitoring-cluster"
-galera_wsrep_cluster_address: "{% for host in ansible_play_batch %}{{ hostvars[host].inventory_hostname }}{% if loop.index != loop.length %},{% endif %}{% endfor %}"
+galera_wsrep_cluster_address: "{% for host in ansible_play_batch %}{{ hostvars[host].galera_wsrep_node_address }}{% if loop.index != loop.length %},{% endif %}{% endfor %}"
 galera_wsrep_node_name: "{{ ansible_fqdn }}"
 
 mysql_users:
