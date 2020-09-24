@@ -4,6 +4,6 @@ icingaweb2_db_port: 3306
 icingaweb2_db_user: icingaweb
 icingaweb2_db_name: icingaweb
 
-icingaweb2_ldap_dn: "dc=n0emis,dc=eu"
-icingaweb2_ldap_server: "elara.het.nue.de.n0emis.eu"
-icingaweb2_ldap_password: "{{ lookup('passwordstore', 'infra/elara.het.nue.de.n0emis.eu/ldap/admin') }}"
+icingaweb2_ldap_dn: "dc={{ openldap_org }},dc={{ openldap_tld }}"
+icingaweb2_ldap_server: "localhost"
+icingaweb2_ldap_password: "{{ openldap_admin_password }}"

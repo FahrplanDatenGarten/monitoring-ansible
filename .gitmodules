@@ -13,3 +13,6 @@
 [submodule "roles/geerlingguy.php"]
 	path = roles/geerlingguy.php
 	url = https://github.com/geerlingguy/ansible-role-php
+[submodule "roles/mrlesmithjr.openldap"]
+	path = roles/mrlesmithjr.openldap
+	url = https://github.com/n0emis/ansible-openldap

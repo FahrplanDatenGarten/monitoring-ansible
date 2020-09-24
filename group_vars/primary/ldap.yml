@@ -1,0 +1,25 @@
+openldap_debian_packages:
+  - slapd
+  - ldap-utils
+
+openldap_org: "monitoring"
+openldap_tld: "fdg"
+openldap_admin_bind: "cn=admin,dc={{ openldap_org }},dc={{ openldap_tld }}"
+
+openldap_config: true
+openldap_populate: false
+openldap_populate: true
+openldap_posixgroups: []
+openldap_users: []
+openldap_organizationalunits:
+  - People
+  - Groups
+
+openldap_overlays_and_acls:
+  - name: syncrepl
+    ldifs:
+      - path: syncrepl-module.ldif
+        action: add
+      - path: "syncrepl-config.ldif"
+        action: add
+        template: yes

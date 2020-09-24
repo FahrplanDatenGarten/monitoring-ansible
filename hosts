@@ -1,7 +1,7 @@
 [primary]
-icinga-a.int.goe.de.n0emis.eu ansible_host=10.152.4.44 ansible_user=root galera_wsrep_node_address=10.152.4.44 galera_primary_host=yes
-icinga-b.int.goe.de.n0emis.eu ansible_host=10.152.4.45 ansible_user=root galera_wsrep_node_address=10.152.4.45
-icinga-c.int.goe.de.n0emis.eu ansible_host=10.152.4.46 ansible_user=root galera_wsrep_node_address=10.152.4.46
+icinga-a.int.goe.de.n0emis.eu ansible_host=10.152.4.44 ansible_user=root galera_wsrep_node_address=10.152.4.44 galera_primary_host=yes ldap_server_id=1
+icinga-b.int.goe.de.n0emis.eu ansible_host=10.152.4.45 ansible_user=root galera_wsrep_node_address=10.152.4.45 ldap_server_id=2
+icinga-c.int.goe.de.n0emis.eu ansible_host=10.152.4.46 ansible_user=root galera_wsrep_node_address=10.152.4.46 ldap_server_id=3
 
 galera-1.int.sig.de.labcode.de galera_primary_host=yes galera_wsrep_node_address=10.151.4.17
 galera-2.int.sig.de.labcode.de galera_wsrep_node_address=10.151.4.16

@@ -1,0 +1,12 @@
+dn: cn=module{0},cn=config
+changetype: modify
+add: olcModuleLoad
+olcModuleLoad: syncprov
+
+# dn: olcOverlay={0}smbk5pwd,olcDatabase={1}mdb,cn=config
+
+dn: olcOverlay=syncprov, olcDatabase={1}mdb,cn=config
+changetype: add
+objectclass: olcSyncProvConfig
+olcOverlay: syncprov
+olcSpCheckpoint: 100 10

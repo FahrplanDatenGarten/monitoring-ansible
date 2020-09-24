@@ -15,6 +15,12 @@
 - hosts: primary
   become: yes
   roles:
+    - mrlesmithjr.openldap
+  tags: ldap
+
+- hosts: primary
+  become: yes
+  roles:
     - geerlingguy.php
     - geerlingguy.nginx
   tags: php
