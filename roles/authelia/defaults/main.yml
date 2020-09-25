@@ -1,0 +1,7 @@
+---
+authelia_binary_path: "/usr/bin"
+authelia_binary: "{{ authelia_binary_path }}/authelia-linux-amd64"
+authelia_config_path: "/etc/authelia"
+
+authelia_version: "4.22.0"
+authelia_download_url: "https://github.com/authelia/authelia/releases/download/v{{ authelia_version }}/authelia-linux-amd64.tar.gz"

@@ -3,7 +3,7 @@ nginx_vhost_template: "vhost.j2"
 nginx_remove_default_vhost: true
 nginx_user: www-data
 nginx_vhosts:
-  - listen: "80"
+  - listen: "127.0.0.1:81"
     server_name: "_"
     root: "/usr/share/icingaweb2/public"
     index: "index.php"
@@ -11,13 +11,14 @@ nginx_vhosts:
     template: "{{ nginx_vhost_template }}"
     filename: "icingaweb2.conf"
     extra_parameters: |
+
       location ~ ^/icingaweb2/index\.php(.*)$ {
         fastcgi_pass 127.0.0.1:9000;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME /usr/share/icingaweb2/public/index.php;
         fastcgi_param ICINGAWEB_CONFIGDIR /etc/icingaweb2;
-        fastcgi_param REMOTE_USER $remote_user;
+        fastcgi_param REMOTE_USER $http_remote_user;
       }
 
       location ~ ^/icingaweb2(.+)? {

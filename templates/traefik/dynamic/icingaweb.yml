@@ -1,0 +1,23 @@
+http:
+  routers:
+    service-icingaweb-http:
+      rule: "PathPrefix(`/icingaweb2`)"
+      service: "service-icingaweb@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-icingaweb-https:
+      rule: "PathPrefix(`/icingaweb2`)"
+      service: "service-icingaweb@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "authelia@file"
+      tls:
+        certResolver: "{{ traefik_default_cert_resovler }}"
+  services:
+    service-icingaweb:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:81"

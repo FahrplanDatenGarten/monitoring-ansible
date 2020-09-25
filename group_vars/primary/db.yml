@@ -13,7 +13,11 @@ mysql_users:
   - name: "{{ icinga2_ido_user }}"
     password: "{{ icinga2_ido_password }}"
     priv: "{{ icinga2_ido_name }}.*:ALL"
+  - name: "{{ authelia_db_user }}"
+    password: "{{ authelia_db_password }}"
+    priv: "{{ authelia_db_name }}.*:ALL"
 
 mysql_databases:
-  - name: "icingaweb"
+  - name: "{{ icingaweb2_db_name }}"
   - name: "{{ icinga2_ido_name }}"
+  - name: "{{ authelia_db_name }}"

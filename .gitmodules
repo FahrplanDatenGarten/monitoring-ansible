@@ -16,3 +16,9 @@
 [submodule "roles/mrlesmithjr.openldap"]
 	path = roles/mrlesmithjr.openldap
 	url = https://github.com/n0emis/ansible-openldap
+[submodule "roles/geerlingguy.redis"]
+	path = roles/geerlingguy.redis
+	url = https://github.com/geerlingguy/ansible-role-redis
+[submodule "roles/em0lar.traefik"]
+	path = roles/em0lar.traefik
+	url = https://github.com/em0lar/ansible-role-traefik

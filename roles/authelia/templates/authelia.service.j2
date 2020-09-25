@@ -1,0 +1,10 @@
+[Unit]
+Description=Authelia authentication and authorization server
+After=network.target
+
+[Service]
+ExecStart={{ authelia_binary }} --config {{ authelia_config_path }}/config.yml
+SyslogIdentifier=authelia
+
+[Install]
+WantedBy=multi-user.target
