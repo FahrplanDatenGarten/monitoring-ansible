@@ -23,6 +23,10 @@ openldap_overlays_and_acls:
       - path: "syncrepl-config.ldif"
         action: add
         template: yes
+  - name: general
+    ldifs:
+      - path: memberof.ldif
+        action: add
 
 authelia_db_name: authelia
 authelia_db_user: authelia

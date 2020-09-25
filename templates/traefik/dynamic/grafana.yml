@@ -1,0 +1,21 @@
+http:
+  routers:
+    service-grafana-http:
+      rule: "PathPrefix(`/grafana`)"
+      service: "service-grafana@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-grafana-https:
+      rule: "PathPrefix(`/grafana`)"
+      service: "service-grafana@file"
+      entryPoints:
+        - "https"
+      tls:
+        certResolver: "{{ traefik_default_cert_resovler }}"
+  services:
+    service-grafana:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:3000"

@@ -59,3 +59,9 @@
   roles:
     - icingaweb2
   tags: icingaweb,web
+
+- hosts: primary
+  become: yes
+  roles:
+    - cloudalchemy.grafana
+  tags: grafana

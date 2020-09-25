@@ -22,3 +22,6 @@
 [submodule "roles/em0lar.traefik"]
 	path = roles/em0lar.traefik
 	url = https://github.com/em0lar/ansible-role-traefik
+[submodule "roles/cloudalchemy.grafana"]
+	path = roles/cloudalchemy.grafana
+	url = https://github.com/cloudalchemy/ansible-grafana

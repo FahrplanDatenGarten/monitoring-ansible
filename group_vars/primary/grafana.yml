@@ -1,0 +1,64 @@
+---
+grafana_security:
+  admin_user: "admin"
+  admin_password: enter_your_secure_password
+
+grafana_address: "127.0.0.1"
+
+grafana_database_name: "grafana"
+grafana_database_user: "grafana"
+
+grafana_database:
+  type: "mysql"
+  host: "127.0.0.1:3306"
+  name: "{{ grafana_database_name }}"
+  user: "{{ grafana_database_user }}"
+  password: "{{ grafana_database_password }}"
+
+grafana_url: "https://{{ ansible_fqdn }}/grafana"
+
+grafana_server:
+  protocol: http
+  enforce_domain: false
+  socket: ""
+  cert_key: ""
+  cert_file: ""
+  enable_gzip: false
+  static_root_path: public
+  router_logging: false
+  serve_from_sub_path: true
+
+grafana_auth:
+  ldap:
+    enabled: true
+
+
+grafana_ldap:
+  verbose_logging: true
+  servers:
+    host: 127.0.0.1
+    port: 389
+    use_ssl: false
+    start_tls: false
+    bind_dn: "cn=admin,{{ icingaweb2_ldap_dn }}"
+    bind_password: "{{ openldap_admin_password }}"
+    search_filter: "(cn=%s)"
+    search_base_dns:
+      - "{{ icingaweb2_ldap_dn }}"
+    group_search_filter: "(&(objectClass=groupOfNames)(member=%s))"
+    group_search_filter_user_attribute: "dn"
+    group_search_base_dns:
+      - "ou=Groups,{{ icingaweb2_ldap_dn }}"
+    attributes:
+      name: sn
+      username: uid
+      member_of: memberOf
+      email: mail
+  group_mappings:
+    - name: Main Organization
+      id: 1
+      groups:
+        - group_dn: "cn=admins,ou=Groups,{{ icingaweb2_ldap_dn }}"
+          org_role: Admin
+        - group_dn: "*"
+          org_role: Viewer
