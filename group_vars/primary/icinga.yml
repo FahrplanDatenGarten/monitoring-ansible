@@ -10,6 +10,7 @@ icinga2_features:
   - "api"
   - "notification"
   - "mainlog"
+  - "graphite"
 
 icinga2_zones:
   primary:

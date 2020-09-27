@@ -1,5 +1,6 @@
 {% for host in icinga2_zones.primary.endpoints %}
 object Host "{{ host }}" {
+    import "generic-host"
     check_command = "hostalive"
     address = "{{ host }}"
 }

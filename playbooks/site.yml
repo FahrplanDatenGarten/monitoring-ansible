@@ -51,6 +51,12 @@
 - hosts: primary
   become: yes
   roles:
+    - graphite
+  tags: graphite
+
+- hosts: primary
+  become: yes
+  roles:
     - icinga2-primary
   tags: icinga
 

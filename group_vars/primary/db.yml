@@ -5,6 +5,7 @@ galera_cluster_bind_address: "0.0.0.0"
 galera_wsrep_cluster_name: "monitoring-cluster"
 galera_wsrep_cluster_address: "{% for host in ansible_play_batch %}{{ hostvars[host].galera_wsrep_node_address }}{% if loop.index != loop.length %},{% endif %}{% endfor %}"
 galera_wsrep_node_name: "{{ ansible_fqdn }}"
+galera_wsrep_node_address: "{{ ha_node_address }}"
 
 mysql_users:
   - name: "{{ icingaweb2_db_user }}"
@@ -19,9 +20,13 @@ mysql_users:
   - name: "{{ grafana_database_user }}"
     password: "{{ grafana_database_password }}"
     priv: "{{ grafana_database_name }}.*:ALL"
+  - name: "{{ graphite_db_user }}"
+    password: "{{ graphite_db_password }}"
+    priv: "{{ graphite_db_name }}.*:ALL"
 
 mysql_databases:
   - name: "{{ icingaweb2_db_name }}"
   - name: "{{ icinga2_ido_name }}"
   - name: "{{ authelia_db_name }}"
   - name: "{{ grafana_database_name }}"
+  - name: "{{ graphite_db_name }}"

@@ -1,0 +1,50 @@
+---
+- name: Install requirements
+  apt:
+    name:
+      - graphite-web
+      - graphite-carbon
+      - uwsgi
+      - uwsgi-plugin-python3
+    state: present
+
+- name: Copy carbon config files
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/carbon/{{ item }}"
+  loop:
+    - carbon.conf # TODO: Modify this!!!
+    - storage-schemas.conf
+  notify:
+    - restart carbon-cache
+    - restart carbon-relay
+
+- name: Enable and start carbon cache
+  service:
+    name: "carbon-cache"
+    state: started
+    enabled: yes
+
+- name: Enable and start carbon relay
+  service:
+    name: "carbon-relay@default"
+    state: started
+    enabled: yes
+
+- name: Copy graphites local settings
+  template:
+    src: "local_settings.py.j2"
+    dest: "/etc/graphite/local_settings.py"
+  notify: restart uwsgi
+
+- name: Migrate graphites database
+  become: yes
+  become_user: "_graphite"
+  command: "graphite-manage migrate"
+  run_once: yes
+
+- name: Copy uwsgi config file
+  template:
+    src: "graphite.ini.j2"
+    dest: "/etc/uwsgi/apps-enabled/graphite.ini"
+  notify: restart uwsgi

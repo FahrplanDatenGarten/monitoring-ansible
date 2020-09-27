@@ -1,0 +1,23 @@
+http:
+  routers:
+    service-graphite-http:
+      rule: "PathPrefix(`/graphite`)"
+      service: "service-graphite@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-graphite-https:
+      rule: "PathPrefix(`/graphite`)"
+      service: "service-graphite@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "authelia@file"
+      tls:
+        certResolver: "{{ traefik_default_cert_resovler }}"
+  services:
+    service-graphite:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:82"

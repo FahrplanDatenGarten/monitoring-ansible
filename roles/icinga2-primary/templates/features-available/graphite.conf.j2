@@ -1,0 +1,11 @@
+/**
+* The GraphiteWriter type writes check result metrics and
+* performance data to a graphite tcp socket.
+*/
+
+object GraphiteWriter "graphite" {
+    host = "127.0.0.1"
+    port = 2013
+    enable_send_thresholds = true
+    enable_send_metadata = true
+}

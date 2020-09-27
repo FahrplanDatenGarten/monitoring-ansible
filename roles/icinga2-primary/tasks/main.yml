@@ -54,6 +54,7 @@
     src: "{{ item }}.j2"
   loop:
     - "features-available/ido-mysql.conf"
+    - "features-available/graphite.conf"
     - "conf.d/api-users.conf"
     - "zones.conf"
   notify: restart icinga2

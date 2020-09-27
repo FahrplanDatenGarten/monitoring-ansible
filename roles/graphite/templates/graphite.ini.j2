@@ -1,0 +1,8 @@
+[uwsgi]
+processes = 2
+socket = localhost:8080
+plugins-dir = /usr/lib/uwsgi
+plugins = python3
+uid = _graphite
+gid = _graphite
+wsgi-file = /usr/share/graphite-web/graphite.wsgi

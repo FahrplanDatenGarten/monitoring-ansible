@@ -1,0 +1,5 @@
+graphite_db_name: "graphite"
+graphite_db_user: "graphite"
+
+graphite_relay_destinations: "{% for host in ansible_play_batch %}{{ hostvars[host].ha_node_address }}:2004{% if loop.index != loop.length %},{% endif %}{% endfor %}"
+graphite_relay_destinations_length: "{{ ansible_play_batch | length }}"
