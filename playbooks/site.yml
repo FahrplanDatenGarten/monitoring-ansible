@@ -34,6 +34,7 @@
   become: yes
   roles:
     - geerlingguy.redis
+    - dynomite
   tags: redis, auth
 
 - hosts: primary

@@ -1,0 +1,22 @@
+[Unit]
+Description=Dynomite
+ConditionPathExists={{ dynomite_dir }}
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=1
+startLimitIntervalSec=60
+
+WorkingDirectory={{ dynomite_dir }}
+ExecStart=/usr/local/sbin/dynomite -c /etc/dynomite.yml
+
+PermissionsStartOnly=true
+
+[Install]
+WantedBy=multi-user.target

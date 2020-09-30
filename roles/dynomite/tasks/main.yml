@@ -1,0 +1,58 @@
+---
+- name: Install build requirements
+  apt:
+    name:
+      - libtool
+      - autoconf
+      - automake
+
+- name: Clone dynomite source
+  git:
+    repo: "{{ dynomite_source }}"
+    dest: "{{ dynomite_dir }}"
+    force: yes
+    version: "{{ dynomite_version }}"
+  register: dynomite_source_clone
+
+- name: Run autoreconf
+  command: "autoreconf -fvi"
+  args:
+    chdir: "{{ dynomite_dir }}"
+  when: dynomite_source_clone.changed
+
+- name: Run configure
+  command: "{{ dynomite_dir }}/configure --enable-debug=yes"
+  args:
+    chdir: "{{ dynomite_dir }}"
+  when: dynomite_source_clone.changed
+
+- name: Build dynomite
+  make:
+    chdir: "{{ dynomite_dir }}"
+  when: dynomite_source_clone.changed
+  notify: restart dynomite
+
+- name: Link dynomite binary
+  file:
+    src: "{{ dynomite_dir }}/src/dynomite"
+    path: "/usr/local/sbin/dynomite"
+    state: link
+
+- name: Create dynomite systemd service
+  template:
+    src: "dynomite.service.j2"
+    dest: "/etc/systemd/system/dynomite.service"
+  notify: restart dynomite
+
+- name: Copy dynomite config file
+  template:
+    src: "dynomite.yml.j2"
+    dest: "/etc/dynomite.yml"
+  notify: restart dynomite
+
+- name: Make sure dynomite service is enabled and started
+  service:
+    name: "dynomite"
+    state: started
+    enabled: yes
+    daemon_reload: yes

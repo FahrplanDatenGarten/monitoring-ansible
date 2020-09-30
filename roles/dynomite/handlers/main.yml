@@ -1,0 +1,5 @@
+---
+- name: restart dynomite
+  service:
+    name: "dynomite"
+    state: restarted

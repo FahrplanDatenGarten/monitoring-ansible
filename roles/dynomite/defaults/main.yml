@@ -1,0 +1,4 @@
+---
+dynomite_source: "https://github.com/n0emis/dynomite.git"
+dynomite_dir: "/var/lib/dynomite"
+dynomite_version: "dev"
