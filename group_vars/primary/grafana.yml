@@ -1,7 +1,14 @@
 ---
 grafana_security:
   admin_user: "admin"
-  admin_password: enter_your_secure_password
+  admin_password: "{{ grafana_admin_password }}"
+
+grafana_plugins:
+  - grafana-worldmap-panel
+  - grafana-clock-panel
+  - grafana-piechart-panel
+  - redis-datasource
+  - grafana-github-datasource
 
 grafana_address: "127.0.0.1"
 
@@ -31,7 +38,6 @@ grafana_server:
 grafana_auth:
   ldap:
     enabled: true
-
 
 grafana_ldap:
   verbose_logging: true
