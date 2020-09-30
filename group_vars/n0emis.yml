@@ -1,1 +1,13 @@
 cookie_base_domain: n0emis.eu
+
+icinga2_zones:
+  primary:
+    endpoints:
+      - icinga-a.int.goe.de.n0emis.eu
+      - icinga-b.int.goe.de.n0emis.eu
+
+icinga2_endpoints:
+  icinga-a.int.goe.de.n0emis.eu:
+    host: icinga-a.int.goe.de.n0emis.eu
+  icinga-b.int.goe.de.n0emis.eu:
+    host: icinga-b.int.goe.de.n0emis.eu

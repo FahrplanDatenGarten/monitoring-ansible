@@ -55,13 +55,13 @@
     - graphite
   tags: graphite
 
-- hosts: primary
+- hosts: icinga-primary
   become: yes
   roles:
     - icinga2-primary
   tags: icinga
 
-- hosts: primary
+- hosts: icinga-primary
   become: yes
   roles:
     - icingaweb2

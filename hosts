@@ -1,16 +1,22 @@
-[primary]
-icinga-a.int.goe.de.n0emis.eu ansible_host=10.152.4.44 ansible_user=root ha_node_address=10.152.4.44 galera_primary_host=yes ldap_server_id=1
-icinga-b.int.goe.de.n0emis.eu ansible_host=10.152.4.45 ansible_user=root ha_node_address=10.152.4.45 ldap_server_id=2
-icinga-c.int.goe.de.n0emis.eu ansible_host=10.152.4.46 ansible_user=root ha_node_address=10.152.4.46 ldap_server_id=3
+[primary:children]
+n0emis_primary
+em0lar
 
-galera-1.int.sig.de.labcode.de galera_primary_host=yes ha_node_address=10.151.4.17
-galera-2.int.sig.de.labcode.de ha_node_address=10.151.4.16
-galera-3.int.sig.de.labcode.de ha_node_address=10.151.4.18
+[icinga-primary:children]
+n0emis_icinga_primary
 
-[n0emis]
-icinga-a.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.44 galera_primary_host=yes
-icinga-b.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.45
-icinga-c.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.46
+[n0emis_icinga_primary]
+icinga-a.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.44 ldap_server_id=1 galera_primary_host=yes
+icinga-b.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.45 ldap_server_id=2
+
+[n0emis_primary]
+icinga-c.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.46 ldap_server_id=3
+
+[n0emis_primary:children]
+n0emis_icinga_primary
+
+[n0emis:children]
+n0emis_primary
 
 [em0lar]
 galera-1.int.sig.de.labcode.de galera_primary_host=yes ha_node_address=10.151.4.17
