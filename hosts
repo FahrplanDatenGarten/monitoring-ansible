@@ -1,22 +1,29 @@
 [primary:children]
-n0emis_primary
+primary_icinga
+primary_prometheus
 em0lar
 
-[icinga-primary:children]
-n0emis_icinga_primary
+[primary_icinga:children]
+n0emis_primary_icinga
 
-[n0emis_icinga_primary]
+[primary_prometheus:children]
+n0emis_primary_prometheus
+
+
+[n0emis_primary_icinga]
 icinga-a.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.44 ldap_server_id=1 galera_primary_host=yes
 icinga-b.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.45 ldap_server_id=2
 
-[n0emis_primary]
+[n0emis_primary_prometheus]
 icinga-c.int.goe.de.n0emis.eu ansible_user=root ha_node_address=10.152.4.46 ldap_server_id=3
 
 [n0emis_primary:children]
-n0emis_icinga_primary
+n0emis_primary_icinga
+n0emis_primary_prometheus
 
 [n0emis:children]
 n0emis_primary
+
 
 [em0lar]
 galera-1.int.sig.de.labcode.de galera_primary_host=yes ha_node_address=10.151.4.17
