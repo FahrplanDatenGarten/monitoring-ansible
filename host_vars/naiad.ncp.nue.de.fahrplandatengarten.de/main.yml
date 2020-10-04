@@ -2,3 +2,20 @@
 ha_node_address: "172.172.172.1"
 ldap_server_id: 1
 galera_primary_host: yes
+
+wireguard_networks:
+  - wg-fdg-mon
+
+wireguard_wg-fdg-mon_interface:
+  address: "{{ ha_node_address }}/29"
+  private_key: "{{ wg_naiad_priv }}"
+  listen_port: 40000
+wireguard_wg-fdg-mon_peers:
+  nereid:
+    endpoint: nereid.ovh.fra.de.fahrplandatengarten.de:40000
+    public_key: "{{ wg_nereid_pub }}"
+    allowed_ips: "172.172.172.2/32"
+  neso:
+    endpoint: neso.het.fks.de.fahrplandatengarten.de:40000
+    public_key: "{{ wg_neso_pub }}"
+    allowed_ips: "172.172.172.3/32"

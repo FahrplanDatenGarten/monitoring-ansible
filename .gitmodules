@@ -22,3 +22,6 @@
 [submodule "roles/cloudalchemy.grafana"]
 	path = roles/cloudalchemy.grafana
 	url = https://github.com/cloudalchemy/ansible-grafana
+[submodule "roles/n0emis.wireguard"]
+	path = roles/n0emis.wireguard
+	url = https://github.com/n0emis/ansible-wireguard
