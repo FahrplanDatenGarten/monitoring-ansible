@@ -1,0 +1,4 @@
+---
+ha_node_address: "172.172.172.1"
+ldap_server_id: 1
+galera_primary_host: yes

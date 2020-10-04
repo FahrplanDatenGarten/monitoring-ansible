@@ -4,10 +4,27 @@ primary_prometheus
 em0lar
 
 [primary_icinga:children]
+prod_primary_icinga
 n0emis_primary_icinga
 
 [primary_prometheus:children]
+prod_primary_prometheus
 n0emis_primary_prometheus
+
+
+[prod_primary_icinga]
+neso.het.fks.de.fahrplandatengarten.de
+nereid.ovh.fra.de.fahrplandatengarten.de
+
+[prod_primary_prometheus]
+naiad.ncp.nue.de.fahrplandatengarten.de
+
+[prod_primary:children]
+prod_primary_icinga
+prod_primary_prometheus
+
+[prod:children]
+prod_primary
 
 
 [n0emis_primary_icinga]
