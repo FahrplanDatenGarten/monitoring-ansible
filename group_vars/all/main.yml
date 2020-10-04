@@ -33,4 +33,6 @@ users:
   oh_my_zsh:
     theme: agnoster
 
+motd_path: ../../../templates/motd
+
 ansible_python_interpreter: "/usr/bin/python3"
