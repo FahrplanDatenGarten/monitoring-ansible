@@ -34,8 +34,18 @@
 
 - hosts: primary
   become: yes
+  serial:
+    - 1
   roles:
     - em0lar.traefik
+  tasks:
+    - name: Copy acme-dns config file
+      template:
+        src: "../templates/traefik/dns-acme.json.j2"
+        dest: "{{ traefik_acme_dns_file }}"
+        owner: "{{ traefik_user }}"
+        group: "{{ traefik_group }}"
+      notify: restart traefik service
   tags: traefik
 
 - hosts: primary

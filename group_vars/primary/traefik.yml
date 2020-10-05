@@ -4,6 +4,21 @@ traefik_version: "v2.3.0"
 traefik_base_path: "/var/lib/traefik"
 traefik_config_directory: "/etc/traefik"
 
+traefik_acme_dns_file: "{{ traefik_config_directory }}/acme-dns-api.json"
+
+traefik_environment_variables:
+  ACME_DNS_API_BASE: "https://auth.acme-dns.io"
+  ACME_DNS_STORAGE_PATH: "{{ traefik_acme_dns_file }}"
+
+traefik_tls_letsencrypt_challenges_dns:
+  enable: yes
+  provider: acme-dns
+  delay: 0
+  disablePropagationCheck: "true"
+  email: "le@fahrplandatengarten.de"
+  name: "le_dns"
+  storage: "{{ traefik_base_path }}/acme.json"
+
 traefik_middlewares_https_redirect_enable: yes
 
 traefik_dynamic_config_files_paths:
