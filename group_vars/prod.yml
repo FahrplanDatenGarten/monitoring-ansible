@@ -15,3 +15,11 @@ icinga2_endpoints:
     host: neso.het.fks.de.fahrplandatengarten.de
   nereid.ovh.fra.de.fahrplandatengarten.de:
     host: nereid.ovh.fra.de.fahrplandatengarten.de
+
+traefik_tls_block: |
+  tls:
+          certResolver: "le_dns"
+          domains:
+            - main: "monitoring.fahrplandatengarten.de"
+              sans:
+                - "*.monitoring.fahrplandatengarten.de"

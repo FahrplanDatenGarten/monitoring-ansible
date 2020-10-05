@@ -1,0 +1,35 @@
+http:
+  routers:
+    service-icingaweb-http:
+      rule: "Host(`icinga.monitoring.fahrplandatengarten.de`) || PathPrefix(`/icingaweb2`)"
+      service: "service-icingaweb@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-icingaweb-red-https:
+      rule: "(Host(`icinga.monitoring.fahrplandatengarten.de`) && Path(`/`)) || (Host(`monitoring.fahrplandatengarten.de`) && PathPrefix(`/icingaweb2`)) || PathPrefix(`/icinga`)"
+      service: "service-icingaweb@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "icinga_redirect"
+      {{ traefik_tls_block }}
+    service-icingaweb-https:
+      rule: "PathPrefix(`/icingaweb2`)"
+      service: "service-icingaweb@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "authelia@file"
+      {{ traefik_tls_block }}
+  services:
+    service-icingaweb:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:81"
+  middlewares:
+    icinga_redirect:
+      redirectRegex:
+        regex: "^https://(.*)/((icingaweb2)|(icinga))*(.*)"
+        replacement: "https://icinga.monitoring.fahrplandatengarten.de/icingaweb2/${3}"

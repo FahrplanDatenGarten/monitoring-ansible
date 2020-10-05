@@ -1,0 +1,26 @@
+http:
+  routers:
+    service-authelia-http:
+      rule: "PathPrefix(`/auth`)"
+      service: "service-authelia@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-authelia-https:
+      rule: "PathPrefix(`/auth`)"
+      service: "service-authelia@file"
+      entryPoints:
+        - "https"
+      {{ traefik_tls_block }}
+  services:
+    service-authelia:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:9091"
+  middlewares:
+    authelia:
+      forwardauth:
+        address: "http://127.0.0.1:9091/auth/api/verify?rd=https://{{ authelia_auth_redirect }}/auth"
+        trustForwardHeader: true
+        authResponseHeaders: "Remote-User, Remote-Groups"

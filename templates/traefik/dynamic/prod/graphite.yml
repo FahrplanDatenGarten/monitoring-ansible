@@ -1,0 +1,35 @@
+http:
+  routers:
+    service-graphite-http:
+      rule: "Host(`graphite.monitoring.fahrplandatengarten.de`) || Host(`monitoring.fahrplandatengarten.de`) && PathPrefix(`/graphite`)"
+      service: "service-graphite@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-graphite-red-https:
+      rule: "(Host(`graphite.monitoring.fahrplandatengarten.de`) && Path(`/`)) || (Host(`monitoring.fahrplandatengarten.de`) && PathPrefix(`/graphite`))"
+      service: "service-graphite@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "graphite_redirect"
+      {{ traefik_tls_block }}
+    service-graphite-https:
+      rule: "PathPrefix(`/graphite`)"
+      service: "service-graphite@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "authelia@file"
+      {{ traefik_tls_block }}
+  services:
+    service-graphite:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:82"
+  middlewares:
+    graphite_redirect:
+      redirectRegex:
+        regex: "^https://(.*)/(graphite)*(.*)"
+        replacement: "https://graphite.monitoring.fahrplandatengarten.de/graphite/${3}"

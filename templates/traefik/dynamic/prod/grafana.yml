@@ -1,0 +1,33 @@
+http:
+  routers:
+    service-grafana-http:
+      rule: "Host(`grafana.monitoring.fahrplandatengarten.de`) || PathPrefix(`/grafana`)"
+      service: "service-grafana@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-grafana-red-https:
+      rule: "(Host(`grafana.monitoring.fahrplandatengarten.de`) && Path(`/`)) || (Host(`monitoring.fahrplandatengarten.de`) && PathPrefix(`/grafana`))"
+      service: "service-grafana@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "grafana_redirect"
+      {{ traefik_tls_block }}
+    service-grafana-https:
+      rule: "PathPrefix(`/grafana`)"
+      service: "service-grafana@file"
+      entryPoints:
+        - "https"
+      {{ traefik_tls_block }}
+  services:
+    service-grafana:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:3000"
+  middlewares:
+    grafana_redirect:
+      redirectRegex:
+        regex: "^https://(.*)/(grafana)*(.*)"
+        replacement: "https://grafana.monitoring.fahrplandatengarten.de/grafana/${3}"
