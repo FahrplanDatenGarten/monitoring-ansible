@@ -1,6 +1,7 @@
 ---
 ha_node_address: "172.172.172.2"
 ldap_server_id: 2
+authelia_auth_redirect: "nereid.monitoring.fahrplandatengarten.de"
 
 wireguard_networks:
   - wg-fdg-mon

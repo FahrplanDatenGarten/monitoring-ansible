@@ -1,6 +1,7 @@
 ---
 ha_node_address: "172.172.172.3"
 ldap_server_id: 3
+authelia_auth_redirect: "neso.monitoring.fahrplandatengarten.de"
 
 wireguard_networks:
   - wg-fdg-mon
