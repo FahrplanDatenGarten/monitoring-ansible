@@ -26,7 +26,7 @@
     - geerlingguy.nginx
   tags: nginx
 
-- hosts: primary
+- hosts: primary_icinga
   become: yes
   roles:
     - geerlingguy.php

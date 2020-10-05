@@ -8,7 +8,7 @@ http:
       middlewares:
         - "https_redirect"
     service-icingaweb-red-https:
-      rule: "(Host(`icinga.monitoring.fahrplandatengarten.de`) && Path(`/`)) || (Host(`monitoring.fahrplandatengarten.de`) && PathPrefix(`/icingaweb2`)) || PathPrefix(`/icinga`)"
+      rule: "(Host(`icinga.monitoring.fahrplandatengarten.de`) && Path(`/`)) || (Host(`monitoring.fahrplandatengarten.de`) && PathPrefix(`/icingaweb2`)) || Path(`/icinga`)"
       service: "service-icingaweb@file"
       entryPoints:
         - "https"
