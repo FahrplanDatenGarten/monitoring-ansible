@@ -3,7 +3,6 @@ object Host "{{ host }}" {
     import "generic-host"
     check_command = "hostalive"
     address = "{{ host }}"
-    address6 = "{{ hostvars[host].ansible_default_ipv6.address }}"
 }
 
 {% endfor %}

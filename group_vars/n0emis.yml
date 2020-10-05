@@ -1,6 +1,8 @@
 cookie_base_domain: n0emis.eu
 traefik_site_group: n0emis
 
+icinga2_primary_config_endpoint: "icinga-a.int.goe.de.n0emis.eu"
+
 icinga2_zones:
   primary:
     endpoints:

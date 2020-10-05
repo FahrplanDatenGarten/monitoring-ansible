@@ -1,6 +1,8 @@
 ---
-cookie_base_domain: monitoring.fahrplandatengarten.de
+cookie_base_domain: fahrplandatengarten.de
 traefik_site_group: prod
+
+icinga2_primary_config_endpoint: "neso.het.fks.de.fahrplandatengarten.de"
 
 icinga2_zones:
   primary:

@@ -5,4 +5,5 @@ icingaweb2_apt_repo:
 
 icingaweb2_packages_debian:
   - icingaweb2
+  - icingaweb2-module-monitoring
   - icingacli
