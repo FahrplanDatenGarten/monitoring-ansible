@@ -1,0 +1,21 @@
+http:
+  routers:
+    service-prometheus-http:
+      rule: "PathPrefix(`/prometheus`)"
+      service: "service-prometheus@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-prometheus-https:
+      rule: "PathPrefix(`/prometheus`)"
+      service: "service-prometheus@file"
+      entryPoints:
+        - "https"
+      tls:
+        certResolver: "{{ traefik_default_cert_resovler }}"
+  services:
+    service-prometheus:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:9090"

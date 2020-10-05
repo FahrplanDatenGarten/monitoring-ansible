@@ -1,0 +1,33 @@
+http:
+  routers:
+    service-prometheus-http:
+      rule: "Host(`prometheus.monitoring.fahrplandatengarten.de`) || PathPrefix(`/prometheus`)"
+      service: "service-prometheus@file"
+      entryPoints:
+        - "http"
+      middlewares:
+        - "https_redirect"
+    service-prometheus-red-https:
+      rule: "(Host(`prometheus.monitoring.fahrplandatengarten.de`) && Path(`/`)) || (Host(`monitoring.fahrplandatengarten.de`) && PathPrefix(`/prometheus`))"
+      service: "service-prometheus@file"
+      entryPoints:
+        - "https"
+      middlewares:
+        - "prometheus_redirect"
+      {{ traefik_tls_block }}
+    service-prometheus-https:
+      rule: "PathPrefix(`/prometheus`)"
+      service: "service-prometheus@file"
+      entryPoints:
+        - "https"
+      {{ traefik_tls_block }}
+  services:
+    service-prometheus:
+      loadBalancer:
+        servers:
+          - url: "http://{{ prometheus_web_listen_address }}"
+  middlewares:
+    prometheus_redirect:
+      redirectRegex:
+        regex: "^https://(.*)/(prometheus)*(.*)"
+        replacement: "https://prometheus.monitoring.fahrplandatengarten.de/prometheus/${3}"

@@ -85,6 +85,12 @@
     - icingaweb2
   tags: icingaweb,web
 
+- hosts: primary_prometheus
+  become: yes
+  roles:
+    - cloudalchemy.prometheus
+  tags: prometheus
+
 - hosts: primary
   become: yes
   serial:

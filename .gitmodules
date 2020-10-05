@@ -25,3 +25,6 @@
 [submodule "roles/n0emis.wireguard"]
 	path = roles/n0emis.wireguard
 	url = https://github.com/n0emis/ansible-wireguard
+[submodule "roles/cloudalchemy.prometheus"]
+	path = roles/cloudalchemy.prometheus
+	url = https://github.com/cloudalchemy/ansible-prometheus
