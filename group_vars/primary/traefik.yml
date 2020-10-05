@@ -7,4 +7,4 @@ traefik_config_directory: "/etc/traefik"
 traefik_middlewares_https_redirect_enable: yes
 
 traefik_dynamic_config_files_paths:
-  - "../templates/traefik/dynamic/{{ traefik_group }}/*"
+  - "../templates/traefik/dynamic/{{ traefik_site_group }}/*"

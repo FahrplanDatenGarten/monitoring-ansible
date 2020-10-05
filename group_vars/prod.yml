@@ -1,6 +1,6 @@
 ---
 cookie_base_domain: monitoring.fahrplandatengarten.de
-traefik_group: prod
+traefik_site_group: prod
 
 icinga2_zones:
   primary:

@@ -23,14 +23,14 @@
 - hosts: primary
   become: yes
   roles:
-    - geerlingguy.php
-  tags: php
+    - geerlingguy.nginx
+  tags: nginx
 
 - hosts: primary
   become: yes
   roles:
-    - geerlingguy.nginx
-  tags: nginx
+    - geerlingguy.php
+  tags: php
 
 - hosts: primary
   become: yes

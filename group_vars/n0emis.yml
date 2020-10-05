@@ -1,5 +1,5 @@
 cookie_base_domain: n0emis.eu
-traefik_group: n0emis
+traefik_site_group: n0emis
 
 icinga2_zones:
   primary:
