@@ -20,6 +20,8 @@ http:
       service: "service-grafana@file"
       entryPoints:
         - "https"
+      middlewares:
+        - "authelia@file"
       {{ traefik_tls_block }}
   services:
     service-grafana:

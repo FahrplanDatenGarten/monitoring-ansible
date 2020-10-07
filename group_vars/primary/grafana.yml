@@ -38,6 +38,12 @@ grafana_server:
 grafana_auth:
   ldap:
     enabled: true
+  proxy:
+    enabled: true
+    header_name: Remote-User
+    header_property: username
+    whitelist: 127.0.0.1, ::1
+    headers: Groups:Remote-Groups
 
 grafana_ldap:
   verbose_logging: true
