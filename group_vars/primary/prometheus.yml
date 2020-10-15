@@ -14,4 +14,4 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
         - "matrix.noemis.me"
-
+        - "matrix.labcode.de"
