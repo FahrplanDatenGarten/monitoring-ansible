@@ -9,12 +9,22 @@ icinga2_zones:
     endpoints:
       - neso.het.fks.de.fahrplandatengarten.de
       - nereid.ovh.fra.de.fahrplandatengarten.de
+  elara.het.nue.de.n0emis.eu:
+    endpoints:
+      - elara.het.nue.de.n0emis.eu
+    parent: primary
+  kallisto.int.goe.de.n0emis.eu:
+    endpoints:
+      - kallisto.int.goe.de.n0emis.eu
+    parent: primary
 
 icinga2_endpoints:
   neso.het.fks.de.fahrplandatengarten.de:
     host: neso.het.fks.de.fahrplandatengarten.de
   nereid.ovh.fra.de.fahrplandatengarten.de:
     host: nereid.ovh.fra.de.fahrplandatengarten.de
+  elara.het.nue.de.n0emis.eu: {}
+  kallisto.int.goe.de.n0emis.eu: {}
 
 traefik_tls_block: |
   tls:

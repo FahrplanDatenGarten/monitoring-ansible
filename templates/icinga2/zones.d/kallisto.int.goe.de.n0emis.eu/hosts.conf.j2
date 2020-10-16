@@ -1,0 +1,6 @@
+object Host "kallisto.int.goe.de.n0emis.eu" {
+    import "generic-host"
+    check_command = "hostalive"
+    address = name
+    vars.agent_endpoint = name
+}
