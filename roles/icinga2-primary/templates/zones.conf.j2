@@ -11,6 +11,9 @@ object Endpoint "{{ ep_name }}" {
 {% for zone_name, zone in icinga2_zones.items() %}
 object Zone "{{ zone_name }}" {
     endpoints = [ "{{ zone.endpoints | join('", "') }}" ]
+{% if zone.parent is defined %}
+    parent = "{{ zone.parent }}"
+{% endif %}
 }
 {% endfor %}
 

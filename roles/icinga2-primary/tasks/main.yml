@@ -55,6 +55,7 @@
   loop:
     - "features-available/ido-mysql.conf"
     - "features-available/graphite.conf"
+    - "features-available/api.conf"
     - "conf.d/api-users.conf"
     - "zones.conf"
   notify: restart icinga2

@@ -1,0 +1,15 @@
+/**
+ * The API listener is used for distributed monitoring setups.
+ */
+object ApiListener "api" {
+
+{% if ansible_fqdn == icinga2_primary_config_endpoint %}
+  accept_config = false
+{% else %}
+  accept_config = true
+{% endif %}
+  accept_commands = true
+
+  ticket_salt = TicketSalt
+}
+

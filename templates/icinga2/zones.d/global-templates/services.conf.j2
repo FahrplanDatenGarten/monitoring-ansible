@@ -42,13 +42,3 @@ apply Service "disk" {
     assign where host.vars.agent_endpoint
 }
 
-apply Service "agent-health" {
-    check_command = "cluster-zone"
-
-    display_name = "cluster-health-" + host.name
-
-    /* This follows the convention that the agent zone name is the FQDN which is the same as the host object name. */
-    vars.cluster_zone = host.name
-
-    assign where host.vars.agent_endpoint
-}
