@@ -15,3 +15,9 @@ prometheus_scrape_configs:
       - targets:
         - "matrix.noemis.me"
         - "matrix.labcode.de"
+  - job_name: "traefik"
+    metrics_path: "/metrics/prometheus"
+    scheme: https
+    static_configs:
+      - targets:
+        - "dione.int.sig.de.labcode.de"
