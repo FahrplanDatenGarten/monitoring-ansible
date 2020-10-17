@@ -21,3 +21,4 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
         - "dione.int.sig.de.labcode.de"
+        - "mars.het.nue.de.fahrplandatengarten.de"
