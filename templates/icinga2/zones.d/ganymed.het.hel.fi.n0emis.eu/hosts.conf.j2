@@ -1,0 +1,6 @@
+object Host "ganymed.het.hel.fi.n0emis.eu" {
+    import "generic-host"
+    check_command = "hostalive"
+    address = name
+    vars.agent_endpoint = name
+}
