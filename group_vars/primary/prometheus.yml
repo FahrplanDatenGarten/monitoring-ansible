@@ -22,3 +22,8 @@ prometheus_scrape_configs:
       - targets:
         - "dione.int.sig.de.labcode.de"
         - "mars.het.nue.de.fahrplandatengarten.de"
+  - job_name: "corona"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets:
+        - "localhost:9001"
