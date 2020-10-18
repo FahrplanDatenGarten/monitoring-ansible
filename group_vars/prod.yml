@@ -9,6 +9,12 @@ icinga2_zones:
     endpoints:
       - neso.het.fks.de.fahrplandatengarten.de
       - nereid.ovh.fra.de.fahrplandatengarten.de
+# FahrplanDatenGarten
+  mars.het.nue.de.fahrplandatengarten.de:
+    endpoints:
+      - mars.het.nue.de.fahrplandatengarten.de
+    parent: primary
+# n0emis
   elara.het.nue.de.n0emis.eu:
     endpoints:
       - elara.het.nue.de.n0emis.eu
@@ -17,9 +23,13 @@ icinga2_zones:
     endpoints:
       - kallisto.int.goe.de.n0emis.eu
     parent: primary
-  mars.het.nue.de.fahrplandatengarten.de:
+  ganymed.het.hel.fi.n0emis.eu:
     endpoints:
-      - mars.het.nue.de.fahrplandatengarten.de
+      - ganymed.het.hel.fi.n0emis.eu
+    parent: primary
+  himalia.ion.rhr.de.n0emis.eu:
+    endpoints:
+      - himalia.ion.rhr.de.n0emis.eu
     parent: primary
 
 icinga2_endpoints:
@@ -27,9 +37,13 @@ icinga2_endpoints:
     host: neso.het.fks.de.fahrplandatengarten.de
   nereid.ovh.fra.de.fahrplandatengarten.de:
     host: nereid.ovh.fra.de.fahrplandatengarten.de
+# FahrplanDatenGarten
+  mars.het.nue.de.fahrplandatengarten.de: {}
+# n0emis
   elara.het.nue.de.n0emis.eu: {}
   kallisto.int.goe.de.n0emis.eu: {}
-  mars.het.nue.de.fahrplandatengarten.de: {}
+  ganymed.het.hel.fi.n0emis.eu: {}
+  himalia.ion.rhr.de.n0emis.eu: {}
 
 traefik_tls_block: |
   tls:
