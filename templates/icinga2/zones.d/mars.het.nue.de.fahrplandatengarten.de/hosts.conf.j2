@@ -3,4 +3,8 @@ object Host "mars.het.nue.de.fahrplandatengarten.de" {
     check_command = "hostalive"
     address = name
     vars.agent_endpoint = name
+
+    vars.celery_broker = "{{ fdg_celery_broker_url }}"
+    vars.celery_warning = 5
+    vars.celery_critical = 2
 }

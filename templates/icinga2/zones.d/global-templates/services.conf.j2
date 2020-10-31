@@ -42,3 +42,8 @@ apply Service "disk" {
     assign where host.vars.agent_endpoint
 }
 
+apply Service "celery" {
+  check_command = "celery"
+
+  assign where host.vars.celery_broker
+}

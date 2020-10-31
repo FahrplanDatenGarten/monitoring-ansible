@@ -12,3 +12,4 @@ icinga2_features:
   - "mainlog"
   - "graphite"
 
+icinga2_fdg_custom_plugin_directory: "/usr/lib/monitoring/plugins"

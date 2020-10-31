@@ -1,0 +1,19 @@
+object CheckCommand "celery" {
+  command = [ "{{ icinga2_fdg_custom_plugin_directory }}/check_celery" ]
+  arguments = {
+    "--broker" = {
+      value = "$celery_broker$"
+      description = "URL of the broker celery should connect to"
+      required = true
+    }
+    "--threshold-warn" = {
+      value = "$celery_warning$"
+      description = "Number of workers that should exist (less results in warning status)"
+    }
+    "--threshold-critical" = {
+      value = "$celery_critical$"
+      description = "Number of workers that must exist (less results in critical status)"
+      required = true
+    }
+  }
+}
