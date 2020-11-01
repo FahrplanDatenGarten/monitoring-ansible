@@ -11,6 +11,8 @@ n0emis_primary_icinga
 prod_primary_prometheus
 n0emis_primary_prometheus
 
+[agents:children]
+prod_primary_prometheus
 
 [prod_primary_icinga]
 neso.het.fks.de.fahrplandatengarten.de

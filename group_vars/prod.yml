@@ -9,6 +9,10 @@ icinga2_zones:
     endpoints:
       - neso.het.fks.de.fahrplandatengarten.de
       - nereid.ovh.fra.de.fahrplandatengarten.de
+  naiad.ncp.nue.de.fahrplandatengarten.de:
+    endpoints:
+      - naiad.ncp.nue.de.fahrplandatengarten.de
+    parent: primary
 # FahrplanDatenGarten
   mars.het.nue.de.fahrplandatengarten.de:
     endpoints:
@@ -45,6 +49,7 @@ icinga2_endpoints:
     host: neso.het.fks.de.fahrplandatengarten.de
   nereid.ovh.fra.de.fahrplandatengarten.de:
     host: nereid.ovh.fra.de.fahrplandatengarten.de
+  naiad.ncp.nue.de.fahrplandatengarten.de: {}
 # FahrplanDatenGarten
   mars.het.nue.de.fahrplandatengarten.de: {}
 # n0emis

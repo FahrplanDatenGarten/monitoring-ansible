@@ -1,0 +1,12 @@
+---
+icinga2_zones:
+  primary:
+    endpoints:
+      - neso.het.fks.de.fahrplandatengarten.de
+      - nereid.ovh.fra.de.fahrplandatengarten.de
+
+icinga2_endpoints:
+  neso.het.fks.de.fahrplandatengarten.de:
+    host: neso.het.fks.de.fahrplandatengarten.de
+  nereid.ovh.fra.de.fahrplandatengarten.de:
+    host: nereid.ovh.fra.de.fahrplandatengarten.de

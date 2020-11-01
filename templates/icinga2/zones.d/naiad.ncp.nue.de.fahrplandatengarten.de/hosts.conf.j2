@@ -1,0 +1,6 @@
+object Host "naiad.ncp.nue.de.fahrplandatengarten.de" {
+    import "generic-host"
+    check_command = "hostalive"
+    address = name
+    vars.agent_endpoint = name
+}

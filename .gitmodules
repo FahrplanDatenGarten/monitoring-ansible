@@ -28,3 +28,6 @@
 [submodule "roles/cloudalchemy.prometheus"]
 	path = roles/cloudalchemy.prometheus
 	url = https://github.com/cloudalchemy/ansible-prometheus
+[submodule "roles/fahrplandatengarten.icinga"]
+	path = roles/fahrplandatengarten.icinga
+	url = https://github.com/FahrplanDatenGarten/ansible-role-icinga

@@ -79,6 +79,12 @@
     - icinga2-primary
   tags: icinga
 
+- hosts: agents
+  become: yes
+  roles:
+    - fahrplandatengarten.icinga
+  tags: icinga-agent
+
 - hosts: primary_icinga
   become: yes
   roles:
