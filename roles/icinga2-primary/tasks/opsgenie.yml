@@ -1,0 +1,37 @@
+---
+- name: Check if opsgenie is installed
+  command: dpkg-query -W opsgenie-icinga2
+  register: opsgenie_check_deb
+  failed_when: opsgenie_check_deb.rc > 1
+  changed_when: opsgenie_check_deb.rc == 1
+
+- name: Download opsgenie
+  get_url:
+    url: "https://og-release-cicd-public-oregon.s3-us-west-2.amazonaws.com/purpose=public/project=oec-scripts/env=prod/branch=master/module=oec-scripts/version=1.1.1/opsgenie-icinga2-1.1.1-deb-amd64.deb"
+    dest: "/tmp/opsgenie.deb"
+  when: opsgenie_check_deb.rc == 1
+
+- name: Install opsgenie
+  apt:
+    deb: "/tmp/opsgenie.deb"
+  when: opsgenie_check_deb.rc == 1
+
+- name: Copy opsgenie integration config
+  copy:
+    src: "/home/opsgenie/oec/conf/opsgenie-integration.conf.part"
+    dest: "/home/opsgenie/oec/conf/opsgenie-integration.conf"
+    remote_src: true
+  notify: restart oec
+
+- name: Copy opsgenie icinga config
+  copy:
+    src: "opsgenie.conf"
+    dest: "/etc/icinga2/features-available/opsgenie.conf"
+  notify: restart icinga2
+
+- name: Copy opsgenie config
+  template:
+    src: "opsgenie/config.json"
+    dest: "/home/opsgenie/oec/conf/config.json"
+  notify: restart oec
+

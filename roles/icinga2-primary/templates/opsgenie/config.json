@@ -1,0 +1,63 @@
+{
+  "apiKey": "{{ icinga2_opsgenie_key }}",
+  "baseUrl": "https://api.eu.opsgenie.com",
+  "logLevel": "DEBUG",
+  "globalArgs": [],
+  "globalFlags": {
+    "graphite_url": "http://localhost:5003",
+    "api_url": "https://localhost:5665",
+    "user": "icingaadmin",
+    "password": "icingaadmin",
+    "insecure": "false"
+  },
+  "actionMappings": {
+    "Create": {
+      "filepath": "/home/opsgenie/oec/scripts/actionExecutor.py",
+      "sourceType": "local",
+      "env": [],
+      "stdout": "/home/opsgenie/oec/output/output.txt"
+    },
+    "Acknowledge": {
+      "filepath": "/home/opsgenie/oec/scripts/actionExecutor.py",
+      "sourceType": "local",
+      "env": [],
+      "stdout": "/home/opsgenie/oec/output/output.txt"
+    },
+    "AddNote": {
+      "filepath": "/home/opsgenie/oec/scripts/actionExecutor.py",
+      "sourceType": "local",
+      "env": [],
+      "stdout": "/home/opsgenie/oec/output/output.txt"
+    },
+    "TakeOwnership": {
+      "filepath": "/home/opsgenie/oec/scripts/actionExecutor.py",
+      "sourceType": "local",
+      "env": [],
+      "stdout": "/home/opsgenie/oec/output/output.txt"
+    },
+    "AssignOwnership": {
+      "filepath": "/home/opsgenie/oec/scripts/actionExecutor.py",
+      "sourceType": "local",
+      "env": [],
+      "stdout": "/home/opsgenie/oec/output/output.txt"
+    },
+    "UnAcknowledge": {
+      "filepath": "/home/opsgenie/oec/scripts/actionExecutor.py",
+      "sourceType": "local",
+      "env": [],
+      "stdout": "/home/opsgenie/oec/output/output.txt"
+    }
+  },
+  "pollerConf": {
+    "pollingWaitIntervalInMillis": 100,
+    "visibilityTimeoutInSec": 30,
+    "maxNumberOfMessages": 10
+  },
+  "poolConf": {
+    "maxNumberOfWorker": 12,
+    "minNumberOfWorker": 4,
+    "monitoringPeriodInMillis": 15000,
+    "keepAliveTimeInMillis": 6000,
+    "queueSize": 0
+  }
+}

@@ -41,6 +41,9 @@
   notify: restart icinga2
   when: ansible_fqdn != icinga2_primary_config_endpoint
 
+- name: install opsgenie
+  import_tasks: opsgenie.yml
+
 - name: Enable required icinga features
   command: "icinga2 feature enable {{ item }}"
   register: enable_feature
