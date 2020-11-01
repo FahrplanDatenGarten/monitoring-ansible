@@ -11,5 +11,6 @@ icinga2_features:
   - "notification"
   - "mainlog"
   - "graphite"
+  - "opsgenie"
 
 icinga2_fdg_custom_plugin_directory: "/usr/lib/monitoring/plugins"

@@ -3,3 +3,8 @@
   service:
     name: icinga2
     state: restarted
+
+- name: restart oec
+  service:
+    name: oec
+    state: restarted
