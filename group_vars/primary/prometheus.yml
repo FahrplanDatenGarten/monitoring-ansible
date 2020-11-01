@@ -26,6 +26,7 @@ prometheus_scrape_configs:
         - "sinope.int.goe.de.n0emis.eu"
   - job_name: "corona"
     metrics_path: "/metrics"
+    scrape_interval: "1h"
     static_configs:
       - targets:
         - "localhost:9001"
