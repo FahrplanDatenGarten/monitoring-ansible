@@ -24,6 +24,12 @@ prometheus_scrape_configs:
         - "mars.het.nue.de.fahrplandatengarten.de"
         - "elara.het.nue.de.n0emis.eu"
         - "sinope.int.goe.de.n0emis.eu"
+  - job_name: "keycloak"
+    metrics_path: "/auth/realms/master/metrics"
+    scheme: https
+    static_configs:
+      - targets:
+          - "auth.n0emis.eu"
   - job_name: "corona"
     metrics_path: "/metrics"
     scrape_interval: "1h"
