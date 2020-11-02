@@ -1,8 +1,0 @@
-apply Service "disk" {
-    import "generic-service"
-    check_command = "disk"
-
-    command_endpoint = host.name //requires a host object matching the endpoint object name e.g. icinga2-master1.localdomain
-
-    assign where host.zone == "primary"
-}

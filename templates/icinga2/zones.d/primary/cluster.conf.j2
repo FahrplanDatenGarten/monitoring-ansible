@@ -18,5 +18,5 @@ apply Service "ido-mysql" {
 
     command_endpoint = host.name
 
-    assign where host.zone == "primary"
+    assign where host.zone == "primary" && host.vars.agent_endpoint
 }

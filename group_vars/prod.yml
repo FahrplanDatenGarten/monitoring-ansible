@@ -35,6 +35,7 @@ icinga2_zones:
     endpoints:
       - himalia.ion.rhr.de.n0emis.eu
     parent: primary
+# em0lar
   cetus.het.hel.fi.labcode.de:
     endpoints:
       - cetus.het.hel.fi.labcode.de

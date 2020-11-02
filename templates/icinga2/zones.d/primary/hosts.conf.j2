@@ -7,3 +7,15 @@ object Host "{{ host }}" {
 }
 
 {% endfor %}
+
+object Host "virgil.altenforst.de" {
+    address = name
+
+    check_command = "ping4"
+
+    vars.http_checks = [{
+        "address" = "$address$",
+        "vhost" = "www.altenforst.de",
+        "url" = "/"
+    }]
+}
