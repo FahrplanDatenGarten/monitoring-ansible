@@ -47,3 +47,19 @@ apply Service "celery" {
 
   assign where host.vars.celery_broker
 }
+
+apply Service "http" for (http_check in host.vars.http_checks) {
+  check_command = "http"
+
+  vars.http_address = http_check.address
+  vars.http_vhost = http_check.vhost
+  vars.http_url = http_check.url
+  vars.http_ssl = true
+  vars.http_sni = true
+
+  display_name = "http (" + vars.http_vhost + vars.http_url + ")"
+
+  zone = "primary"
+
+  assign where host.vars.http_checks
+}
