@@ -1,0 +1,23 @@
+---
+telegraf_agent_version: "1.16.1"
+
+telegraf_plugins_default:
+  - plugin: httpjson
+    config:
+      - 'name_override = "codimd"'
+      - 'method = "GET"'
+      - |
+          servers = [
+            "https://md.noemis.me/status",
+            "https://pad.gwdg.de/status",
+            "https://md.ctfl.space/status",
+            "https://demo.codimd.org/status",
+            "https://md.em0lar.de/status",
+          ]
+
+telegraf_agent_output:
+  - type: prometheus_client
+    config:
+      - 'listen = "127.0.0.1:9273"'
+      - 'metric_version = 2'
+      - 'collectors_exclude = ["gocollector", "process"]'

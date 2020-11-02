@@ -97,6 +97,12 @@
     - cloudalchemy.prometheus
   tags: prometheus
 
+- hosts: primary_prometheus
+  become: yes
+  roles:
+    - dj-wasabi.telegraf
+  tags: telegraf
+
 - hosts: primary
   become: yes
   serial:

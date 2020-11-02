@@ -31,3 +31,6 @@
 [submodule "roles/fahrplandatengarten.icinga"]
 	path = roles/fahrplandatengarten.icinga
 	url = https://github.com/FahrplanDatenGarten/ansible-role-icinga
+[submodule "roles/dj-wasabi.telegraf"]
+	path = roles/dj-wasabi.telegraf
+	url = https://github.com/dj-wasabi/ansible-telegraf
