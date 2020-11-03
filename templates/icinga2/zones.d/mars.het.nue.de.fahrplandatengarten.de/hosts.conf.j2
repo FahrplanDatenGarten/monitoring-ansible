@@ -1,8 +1,5 @@
 object Host "mars.het.nue.de.fahrplandatengarten.de" {
-    import "generic-host"
-    check_command = "hostalive"
-    address = name
-    vars.agent_endpoint = name
+    import "agent-host"
 
     vars.celery_broker = "{{ fdg_celery_broker_url }}"
     vars.celery_warning = 5

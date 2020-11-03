@@ -1,15 +1,12 @@
 {% for host in icinga2_zones.primary.endpoints %}
 object Host "{{ host }}" {
-    import "generic-host"
-    check_command = "hostalive"
-    address = "{{ host }}"
+    import "agent-host"
     address6 = "{{ hostvars[host].ansible_default_ipv6.address }}"
 }
 
 {% endfor %}
-
 object Host "virgil.altenforst.de" {
-    address = name
+    import "generic-host"
 
     check_command = "ping4"
 

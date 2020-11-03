@@ -1,6 +1,3 @@
 object Host "cetus.het.hel.fi.labcode.de" {
-    import "generic-host"
-    check_command = "hostalive"
-    address = name
-    vars.agent_endpoint = name
+    import "agent-host"
 }

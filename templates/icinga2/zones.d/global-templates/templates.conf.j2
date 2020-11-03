@@ -17,6 +17,14 @@ template Host "generic-host" {
     retry_interval = 30s
 
     check_command = "hostalive"
+
+    address = name
+}
+
+template Host "agent-host" {
+    import "generic-host"
+
+    vars.agent_endpoint = address
 }
 
 /**
