@@ -23,10 +23,6 @@ icinga2_zones:
     endpoints:
       - elara.het.nue.de.n0emis.eu
     parent: primary
-  kallisto.int.goe.de.n0emis.eu:
-    endpoints:
-      - kallisto.int.goe.de.n0emis.eu
-    parent: primary
   ganymed.het.hel.fi.n0emis.eu:
     endpoints:
       - ganymed.het.hel.fi.n0emis.eu
@@ -34,6 +30,18 @@ icinga2_zones:
   himalia.ion.rhr.de.n0emis.eu:
     endpoints:
       - himalia.ion.rhr.de.n0emis.eu
+    parent: primary
+  kallisto.int.goe.de.n0emis.eu:
+    endpoints:
+      - kallisto.int.goe.de.n0emis.eu
+    parent: primary
+  sinope.int.goe.de.n0emis.eu:
+    endpoints:
+      - sinope.int.goe.de.n0emis.eu
+    parent: primary
+  metis.int.goe.de.n0emis.eu:
+    endpoints:
+      - metis.int.goe.de.n0emis.eu
     parent: primary
 # em0lar
   cetus.het.hel.fi.labcode.de:
@@ -55,9 +63,12 @@ icinga2_endpoints:
   mars.het.nue.de.fahrplandatengarten.de: {}
 # n0emis
   elara.het.nue.de.n0emis.eu: {}
-  kallisto.int.goe.de.n0emis.eu: {}
   ganymed.het.hel.fi.n0emis.eu: {}
   himalia.ion.rhr.de.n0emis.eu: {}
+  kallisto.int.goe.de.n0emis.eu: {}
+  sinope.int.goe.de.n0emis.eu: {}
+  metis.int.goe.de.n0emis.eu: {}
+# em0lar
   cetus.het.hel.fi.labcode.de: {}
   janus.ion.rhr.de.labcode.de: {}
 
