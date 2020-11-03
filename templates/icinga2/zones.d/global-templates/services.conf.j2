@@ -67,3 +67,26 @@ apply Service "http" for (http_check in host.vars.http_checks) {
 
   assign where host.vars.http_checks
 }
+
+apply Service "smtps" {
+  check_command = "ssmtp"
+
+  vars.ssmtp_address = host.vars.smtps_address
+  vars.ssmtp_port = host.vars.smtps_port
+
+  zone = "primary"
+
+  assign where host.vars.smtps_address
+}
+
+apply Service "imaps" {
+  check_command = "imap"
+
+  vars.imap_address = host.vars.imaps_address
+  vars.imap_port = host.vars.imaps_port
+  vars.imap_ssl = true
+
+  zone = "primary"
+
+  assign where host.vars.imaps_address
+}

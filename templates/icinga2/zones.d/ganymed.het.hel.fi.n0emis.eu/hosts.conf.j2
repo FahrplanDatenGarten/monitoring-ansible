@@ -1,6 +1,9 @@
 object Host "ganymed.het.hel.fi.n0emis.eu" {
-    import "generic-host"
-    check_command = "hostalive"
-    address = name
-    vars.agent_endpoint = name
+    import "agent-host"
+
+    vars.smtps_address = "$address$"
+    vars.smtps_port = "465"
+
+    vars.imaps_address = "$address$"
+    vars.imaps_port = "993"
 }

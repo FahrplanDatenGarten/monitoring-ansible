@@ -1,3 +1,9 @@
 object Host "cetus.het.hel.fi.labcode.de" {
     import "agent-host"
+
+    vars.smtps_address = "$address$"
+    vars.smtps_port = "465"
+
+    vars.imaps_address = "$address$"
+    vars.imaps_port = "993"
 }
