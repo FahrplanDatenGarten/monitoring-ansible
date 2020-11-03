@@ -8,7 +8,8 @@ object Host "{{ host }}" {
 object Host "virgil.altenforst.de" {
     import "generic-host"
 
-    check_command = "ping4"
+    check_interval = 10m
+    retry_interval = 2m
 
     vars.http_checks = [{
         "address" = "$address$",

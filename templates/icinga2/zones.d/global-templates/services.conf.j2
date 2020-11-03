@@ -21,6 +21,8 @@ apply Service "ping4" {
 
     check_command = "ping4"
 
+    zone = "primary"
+
     assign where host.address
 }
 
@@ -28,6 +30,8 @@ apply Service "ping6" {
     import "generic-service"
 
     check_command = "ping6"
+
+    zone = "primary"
 
     assign where host.address6
 }
