@@ -1,5 +1,9 @@
 ---
 - name: restart icinga2
+  command: "icinga2 daemon -C"
+  notify: restart icinga2 service
+
+- name: restart icinga2 service
   service:
     name: icinga2
     state: restarted
