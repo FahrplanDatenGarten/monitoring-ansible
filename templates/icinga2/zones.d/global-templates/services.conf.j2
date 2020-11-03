@@ -46,6 +46,35 @@ apply Service "disk" {
     assign where host.vars.agent_endpoint
 }
 
+apply Service "load" {
+    check_command = "load"
+
+    command_endpoint = host.vars.agent_endpoint
+
+    assign where host.vars.agent_endpoint
+}
+
+apply Service "memory" {
+    check_command = "mem"
+
+    // Check is executed on the remote command endpoint
+    command_endpoint = host.vars.agent_endpoint
+
+    vars.mem_used = true
+
+    if (host.vars.mem_count_cache_as_free) {
+        vars.mem_cache = host.vars.mem_count_cache_as_free
+    } else {
+        vars.mem_cache = true
+    }
+
+    vars.mem_warning = host.vars.memory_warning
+
+    vars.mem_critical = host.vars.memory_critical
+
+    assign where host.vars.agent_endpoint && host.vars.memory_critical && host.vars.memory_warning
+}
+
 apply Service "celery" {
   check_command = "celery"
 
