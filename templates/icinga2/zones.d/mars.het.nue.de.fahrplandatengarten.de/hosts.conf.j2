@@ -1,6 +1,8 @@
 object Host "mars.het.nue.de.fahrplandatengarten.de" {
     import "agent-host"
 
+    vars.os_type = "Debian"
+
     vars.celery_broker = "{{ fdg_celery_broker_url }}"
     vars.celery_warning = 5
     vars.celery_critical = 2

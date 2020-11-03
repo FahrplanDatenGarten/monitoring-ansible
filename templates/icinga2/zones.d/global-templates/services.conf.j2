@@ -119,3 +119,11 @@ apply Service "imaps" {
 
   assign where host.vars.imaps_address
 }
+
+apply Service "apt" {
+    check_command = "apt"
+
+    vars.apt_critical = "^[^\\(]*\\([^ ]* (Debian-Security:|Ubuntu:[^/]*/[^-]*-security)"
+
+    assign where host.vars.os_type == "Debian"
+}

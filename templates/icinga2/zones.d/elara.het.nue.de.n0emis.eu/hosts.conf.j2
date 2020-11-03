@@ -1,6 +1,5 @@
 object Host "elara.het.nue.de.n0emis.eu" {
-    import "generic-host"
-    check_command = "hostalive"
-    address = name
-    vars.agent_endpoint = name
+    import "agent-host"
+
+    vars.os_type = "Debian"
 }

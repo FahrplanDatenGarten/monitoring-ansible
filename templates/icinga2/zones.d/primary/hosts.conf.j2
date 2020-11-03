@@ -2,6 +2,8 @@
 object Host "{{ host }}" {
     import "agent-host"
     address6 = "{{ hostvars[host].ansible_default_ipv6.address }}"
+
+    vars.os_type = "Debian"
 }
 
 {% endfor %}
