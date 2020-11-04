@@ -46,3 +46,8 @@
   loop:
     - monitoring
 
+- name: Add additional themes to icingaweb
+  get_url:
+   url: "{{ item.url }}"
+   dest: "/usr/share/icingaweb2/public/css/themes/{{ item.name }}"
+  loop: "{{ icingaweb2_additional_themes }}"

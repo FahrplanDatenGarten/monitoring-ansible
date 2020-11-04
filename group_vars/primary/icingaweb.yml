@@ -7,3 +7,6 @@ icingaweb2_db_name: icingaweb
 icingaweb2_ldap_dn: "dc={{ openldap_org }},dc={{ openldap_tld }}"
 icingaweb2_ldap_server: "localhost"
 icingaweb2_ldap_password: "{{ openldap_admin_password }}"
+icingaweb2_additional_themes:
+  - url: https://raw.githubusercontent.com/flyingchewbacca/icingaweb2-theme-dark/master/Dark.less
+    name: dark.less
