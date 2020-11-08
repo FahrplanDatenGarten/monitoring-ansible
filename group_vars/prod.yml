@@ -52,6 +52,10 @@ icinga2_zones:
     endpoints:
       - janus.ion.rhr.de.labcode.de
     parent: primary
+  tethys.int.sig.de.labcode.de:
+    endpoints:
+      - tethys.int.sig.de.labcode.de
+    parent: primary
 
 icinga2_endpoints:
   neso.het.fks.de.fahrplandatengarten.de:
@@ -71,6 +75,7 @@ icinga2_endpoints:
 # em0lar
   cetus.het.hel.fi.labcode.de: {}
   janus.ion.rhr.de.labcode.de: {}
+  tethys.int.sig.de.labcode.de: {}
 
 traefik_tls_block: |
   tls:
