@@ -128,3 +128,15 @@ apply Service "apt" {
 
     assign where host.vars.os_type == "Debian" && host.vars.check_apt == true
 }
+
+apply Service "zfs" {
+    check_command = "zfs"
+
+    vars.capacity_warning = 70
+    vars.capacity_critical = 80
+    vars.fragmentation_warning = 30
+    vars.fragmentation_critical = 40
+    vars.zpool = host.vars.zpool
+
+    assign where host.vars.zpool
+}

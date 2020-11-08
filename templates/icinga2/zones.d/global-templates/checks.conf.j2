@@ -17,3 +17,32 @@ object CheckCommand "celery" {
     }
   }
 }
+
+object CheckCommand "zfs" {
+  command = [ "/usr/bin/env", "sudo", "{{ icinga2_fdg_custom_plugin_directory }}/check_zfs" ]
+
+  vars.capacity = ["$capacity_warning$", "$capacity_critical$"]
+  vars.fragmentation = ["$fragmentation_warning$", "$fragmentation_critical$"]
+
+  arguments = {
+    "--capacity" = {
+      value = "$capacity$"
+      description = "monitor utilization of zpool (%, int [0-100])"
+      order = -2
+      repeat_key = false
+    }
+    "--fragmentation" = {
+      value = "$fragmentation$"
+      description = "monitor fragmentation of zpool (%, int [0-100])"
+      order = -1
+      repeat_key = false
+    }
+    "--zpool" = {
+      value = "$zpool$"
+      description = "Name of the ZFS-Pool to check"
+      order = 0
+      required = true
+      skip_key = true
+    }
+  }
+}
