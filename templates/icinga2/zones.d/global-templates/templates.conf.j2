@@ -19,12 +19,19 @@ template Host "generic-host" {
     check_command = "hostalive"
 
     address = name
+
+    vars.check_ping4 = true
+    vars.check_ping6 = true
 }
 
 template Host "agent-host" {
     import "generic-host"
 
     vars.agent_endpoint = address
+
+    vars.check_disk = true
+    vars.check_apt = true
+    vars.check_load = true
 }
 
 /**
