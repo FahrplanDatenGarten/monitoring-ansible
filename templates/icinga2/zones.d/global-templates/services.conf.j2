@@ -21,9 +21,14 @@ apply Service "ping4" {
 
     check_command = "ping4"
 
+    if (host.vars.ping4_address) {
+        vars.ping_address = host.vars.ping4_address
+    } else {
+        vars.ping_address = host.address
+    }
     zone = "primary"
 
-    assign where host.address && host.vars.check_ping4 == true
+    assign where (host.address || host.vars.ping4_address) && host.vars.check_ping4 == true
 }
 
 apply Service "ping6" {
@@ -31,9 +36,21 @@ apply Service "ping6" {
 
     check_command = "ping6"
 
+    if (host.vars.ping6_address) {
+        vars.ping_address = host.vars.ping6_address
+    }
+
+    if (host.vars.ping6_wpl) {
+        vars.ping_wpl = host.vars.ping6_wpl
+    }
+
+    if (host.vars.ping6_cpl) {
+        vars.ping_cpl = host.vars.ping6_cpl
+    }
+
     zone = "primary"
 
-    assign where host.address6 && host.vars.check_ping6 == true
+    assign where (host.address6 || host.vars.ping6_address) && host.vars.check_ping6 == true
 }
 
 
