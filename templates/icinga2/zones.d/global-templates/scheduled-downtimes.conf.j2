@@ -1,0 +1,16 @@
+apply ScheduledDowntime "dsl-reconnect-0430-downtime" to Service {
+  author = "icingaadmin"
+  comment = "Scheduled downtime for DSL Reconnect (duh!)"
+
+  ranges = {
+    monday = "04:30-04:40"
+    tuesday = "04:30-04:40"
+    wednesday = "04:30-04:40"
+    thursday = "04:30-04:40"
+    friday = "04:30-04:40"
+    saturday = "04:30-04:40"
+    sunday = "04:30-04:40"
+  }
+
+  assign where "dsl_reconnect_0430_downtime" in service.groups || host.vars.dsl_reconnect_0430_downtime == true
+}
