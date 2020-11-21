@@ -24,14 +24,10 @@
 pattern = ^carbon\.
 retentions = 60:90d
 
+[icinga2]
+pattern = ^icinga2\.
+retentions = 10s:1d,1m:1w,5m:4w,30m:1y,1h:4y
+
 [default_1min_for_1day]
 pattern = .*
 retentions = 60s:1d
-
-[icinga2_metadata]
-pattern = ^icinga2\..*\.metadata\.
-retentions = 1m:2d,5d:10d,30m:90d,360m:4y
-
-[icinga2_perfdata]
-pattern = ^icinga2\..*\.perfdata\.
-retentions = 1m:2d,5d:10d,30m:90d,360m:4y
