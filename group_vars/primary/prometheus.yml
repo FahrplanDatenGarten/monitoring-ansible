@@ -47,7 +47,7 @@ prometheus_scrape_configs:
         - "localhost:9001"
         - "localhost:9002"
   - job_name: minio
-    bearer_token: "{{ minio_n0emis_eu_bearer }}
+    bearer_token: "{{ minio_n0emis_eu_bearer }}"
     metrics_path: /minio/prometheus/metrics
     scheme: https
     static_configs:
