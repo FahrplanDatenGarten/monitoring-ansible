@@ -4,7 +4,7 @@
 */
 
 object GraphiteWriter "graphite" {
-    host = "127.0.0.1"
+    host = "{{ ha_node_address }}"
     port = 2013
     enable_send_thresholds = true
     enable_send_metadata = true
