@@ -100,20 +100,20 @@ MIN_TIMESTAMP_RESOLUTION = 1
 # Set the interface and port for the line (plain text) listener.  Setting the
 # interface to 0.0.0.0 listens on all interfaces.  Port can be set to 0 to
 # disable this listener if it is not required.
-LINE_RECEIVER_INTERFACE = 0.0.0.0
+LINE_RECEIVER_INTERFACE = {{ ha_node_address }}
 LINE_RECEIVER_PORT = 2003
 
 # Set this to True to enable the UDP listener. By default this is off
 # because it is very common to run multiple carbon daemons and managing
 # another (rarely used) port for every carbon instance is not fun.
 ENABLE_UDP_LISTENER = False
-UDP_RECEIVER_INTERFACE = 0.0.0.0
+UDP_RECEIVER_INTERFACE = {{ ha_node_address }}
 UDP_RECEIVER_PORT = 2003
 
 # Set the interface and port for the pickle listener.  Setting the interface to
 # 0.0.0.0 listens on all interfaces.  Port can be set to 0 to disable this
 # listener if it is not required.
-PICKLE_RECEIVER_INTERFACE = 0.0.0.0
+PICKLE_RECEIVER_INTERFACE = {{ ha_node_address }}
 PICKLE_RECEIVER_PORT = 2004
 
 # Set the interface and port for the protobuf listener.  Setting the interface to
@@ -346,9 +346,9 @@ ENABLE_TAGS = False
 # LOG_LISTENER_CONN_SUCCESS = True
 
 [relay]
-LINE_RECEIVER_INTERFACE = 0.0.0.0
+LINE_RECEIVER_INTERFACE = {{ ha_node_address }}
 LINE_RECEIVER_PORT = 2013
-PICKLE_RECEIVER_INTERFACE = 0.0.0.0
+PICKLE_RECEIVER_INTERFACE = {{ ha_node_address }}
 PICKLE_RECEIVER_PORT = 2014
 
 # Carbon-relay has several options for metric routing controlled by RELAY_METHOD
