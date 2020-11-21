@@ -3,7 +3,7 @@ dyn_o_mite:
     rack: {{ ansible_hostname }}
     dyn_listen: {{ ha_node_address }}:8101
     dyn_seeds:
-{% for host in ansible_play_batch if host != ansible_fqdn %}
+{% for host in primary_hosts if host != ansible_fqdn %}
     - {{ hostvars[host].ha_node_address }}:8101:{{ hostvars[host].ansible_hostname }}:dc:1383429731
 {% endfor %}
     listen: 127.0.0.1:6380

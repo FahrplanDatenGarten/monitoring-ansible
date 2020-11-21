@@ -84,3 +84,5 @@ traefik_tls_block: |
             - main: "monitoring.fahrplandatengarten.de"
               sans:
                 - "*.monitoring.fahrplandatengarten.de"
+
+primary_hosts: "{{ groups['prod_primary'] }}"

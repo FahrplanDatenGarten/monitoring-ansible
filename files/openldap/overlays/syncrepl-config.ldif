@@ -6,7 +6,7 @@ olcServerId: {{ ldap_server_id }}
 dn: olcDatabase={1}mdb,cn=config
 changetype: modify
 add: olcSyncrepl
-{% for host in ansible_play_batch if host != ansible_fqdn %}
+{% for host in primary_hosts if host != ansible_fqdn %}
 olcsyncrepl: {{ "{" + (loop.index0 | string) + "}" }}rid=00{{ loop.index0 }}
   provider=ldap://{{ host }}
   type=refreshAndPersist

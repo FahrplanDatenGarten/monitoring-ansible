@@ -14,3 +14,5 @@ icinga2_endpoints:
     host: icinga-a.int.goe.de.n0emis.eu
   icinga-b.int.goe.de.n0emis.eu:
     host: icinga-b.int.goe.de.n0emis.eu
+
+primary_hosts: "{{ groups['prod_primary'] }}"
