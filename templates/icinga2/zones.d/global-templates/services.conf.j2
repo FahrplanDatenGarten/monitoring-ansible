@@ -157,3 +157,21 @@ apply Service "zfs" {
 
     assign where host.vars.zpool
 }
+
+apply Service "dig" {
+    check_command = "dig"
+
+    vars.dig_lookup = host.vars.dig_lookup
+    if (host.vars.dig_server) {
+        vars.dig_server = host.vars.dig_server
+    }
+    if (host.vars.dig_record_type) {
+        vars.dig_record_type = host.vars.dig_record_type
+    } else {
+        vars.dig_record_type = "AAAA"
+    }
+    if (host.vars.dig_expected_address) {
+        vars.dig_expected_address = host.vars.dig_expected_address
+    }
+    assign where host.vars.dig_lookup
+}
