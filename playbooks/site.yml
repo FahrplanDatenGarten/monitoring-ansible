@@ -4,6 +4,7 @@
   roles:
     - n0emis.base
     - gantsign.oh-my-zsh
+    - jnv.unattended-upgrades
   tags: base
 
 - hosts: primary

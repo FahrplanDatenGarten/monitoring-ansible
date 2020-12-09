@@ -34,3 +34,6 @@
 [submodule "roles/dj-wasabi.telegraf"]
 	path = roles/dj-wasabi.telegraf
 	url = https://github.com/dj-wasabi/ansible-telegraf
+[submodule "roles/jnv.unattended-upgrades"]
+	path = roles/jnv.unattended-upgrades
+	url = https://github.com/jnv/ansible-role-unattended-upgrades.git
