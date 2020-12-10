@@ -57,3 +57,10 @@ prometheus_scrape_configs:
     scheme: https
     static_configs:
       - targets: [minio.n0emis.eu]
+  - job_name: powerdns
+    metrics_path: "/metrics"
+    static_configs:
+      - targets:
+        - "ns.n0emis.eu:8082"
+        - "ns2.n0emis.eu:8082"
+        - "ns3.n0emis.eu:8082"
