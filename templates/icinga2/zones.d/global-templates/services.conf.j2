@@ -125,6 +125,36 @@ apply Service "smtps" {
   assign where host.vars.smtps_address
 }
 
+apply Service "ssl" for (ssl_check in host.vars.ssl_checks) {
+  check_command = "ssl"
+
+  vars.ssl_cert_protocol = ssl_check.protocol
+  vars.ssl_cert_crit = 7
+  vars.ssl_cert_warn = 14
+
+  if (ssl_check.address) {
+    vars.ssl_address = ssl_check.address
+  } else {
+    vars.ssl_address = host.name
+  }
+  if (ssl_check.port) {
+    vars.ssl_port = ssl_check.port
+  }
+  if (ssl_check.cn) {
+    vars.ssl_cert_cn = ssl_check.cn
+  }
+  if (ssl_check.altnames) {
+    vars.ssl_cert_altnames = ssl_check.altnames
+  }
+  if (ssl_check.sni) {
+    vars.ssl_cert_sni = ssl_check.sni
+  }
+
+  display_name = "ssl cert ( " + vars.ssl_address + " - " + vars.ssl_cert_protocol  + "(" + vars.ssl_port + ") )"
+
+  assign where host.vars.ssl_checks
+}
+
 apply Service "imaps" {
   check_command = "imap"
 

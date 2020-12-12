@@ -13,4 +13,14 @@ object Host "cetus.het.hel.fi.labcode.de" {
 
     vars.dig_lookup = name
     vars.dig_expected_address = "2a01:4f9:c010:1dcf::1"
+
+    vars.ssl_checks = [{
+        "port" = "993",
+        "protocol" = "imaps",
+        "altnames" = "cetus.het.hel.fi.labcode.de"
+    }, {
+        "port" = "465",
+        "protocol" = "smtps",
+        "altnames" = "cetus.het.hel.fi.labcode.de"
+     }]
 }
