@@ -43,6 +43,10 @@ icinga2_zones:
     endpoints:
       - metis.int.goe.de.n0emis.eu
     parent: primary
+  pasiphae.int.goe.de.n0emis.eu:
+    endpoints:
+      - pasiphae.int.goe.de.n0emis.eu
+    parent: primary
 # em0lar
   cetus.het.hel.fi.labcode.de:
     endpoints:
@@ -72,6 +76,7 @@ icinga2_endpoints:
   kallisto.int.goe.de.n0emis.eu: {}
   sinope.int.goe.de.n0emis.eu: {}
   metis.int.goe.de.n0emis.eu: {}
+  pasiphae.int.goe.de.n0emis.eu: {}
 # em0lar
   cetus.het.hel.fi.labcode.de: {}
   janus.ion.rhr.de.labcode.de: {}
