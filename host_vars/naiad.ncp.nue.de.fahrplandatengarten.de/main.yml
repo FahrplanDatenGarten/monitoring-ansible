@@ -1,6 +1,6 @@
 ---
 ha_node_address: "172.172.172.1"
-ldap_server_id: 1
+ldap_server_id: 4
 galera_primary_host: yes
 authelia_auth_redirect: "naiad.monitoring.fahrplandatengarten.de"
 
