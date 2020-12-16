@@ -18,4 +18,24 @@ object Host "virgil.altenforst.de" {
         "vhost" = "www.altenforst.de",
         "url" = "/"
     }]
+
+    vars.ssl_cert_checks = [{
+        "port" = "443",
+        "protocol" = "https",
+        "cn" = ["altenforst.de", "www.altenforst.de"],
+        "sni" = "altenforst.de",
+        "altnames" = true
+    }, {
+        "port" = "443",
+        "protocol" = "https",
+        "cn" = "listen.altenforst.de",
+        "sni" = "listen.altenforst.de",
+        "altnames" = true
+    }, {
+        "port" = "443",
+        "protocol" = "https",
+        "cn" = "otp.altenforst.de",
+        "sni" = "otp.altenforst.de",
+        "altnames" = true
+    }]
 }
