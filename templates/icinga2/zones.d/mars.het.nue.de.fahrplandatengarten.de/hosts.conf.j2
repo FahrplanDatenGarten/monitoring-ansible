@@ -12,4 +12,12 @@ object Host "mars.het.nue.de.fahrplandatengarten.de" {
         "vhost" = "fahrplandatengarten.de",
         "url" = "/verspaeti"
     }]
+
+    vars.dig_checks = [{
+        "expected_address" = "2a01:4f8:c0c:c683::1"
+    }]
+    vars.dig_cloudflare_checks = [{
+        "expected_address" = "2a01:4f8:c0c:c683::1"
+    }]
+    vars.dig_google_checks = vars.dig_cloudflare_checks
 }

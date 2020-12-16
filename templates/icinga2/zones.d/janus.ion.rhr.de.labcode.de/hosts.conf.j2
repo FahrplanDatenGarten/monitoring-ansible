@@ -7,4 +7,9 @@ object Host "janus.ion.rhr.de.labcode.de" {
 
     vars.memory_critical = 90
     vars.memory_warning = 80
+
+    vars.dig_cloudflare_checks = [{
+        "expected_address" = "2001:8d8:1800:30a::1"
+    }]
+    vars.dig_google_checks = vars.dig_cloudflare_checks
 }

@@ -190,20 +190,66 @@ apply Service "zfs" {
     assign where host.vars.zpool
 }
 
-apply Service "dig" {
+apply Service "dig" for (dig_check in host.vars.dig_checks) {
     check_command = "dig"
 
-    vars.dig_lookup = host.vars.dig_lookup
-    if (host.vars.dig_server) {
-        vars.dig_server = host.vars.dig_server
+    if (dig_check.lookup) {
+        vars.dig_lookup = dig_check.lookup
+    } else {
+        vars.dig_lookup = host.name
     }
-    if (host.vars.dig_record_type) {
-        vars.dig_record_type = host.vars.dig_record_type
+    if (dig_check.record_type) {
+        vars.dig_record_type = dig_check.record_type
     } else {
         vars.dig_record_type = "AAAA"
     }
-    if (host.vars.dig_expected_address) {
-        vars.dig_expected_address = host.vars.dig_expected_address
+    if (dig_check.expected_address) {
+        vars.dig_expected_address = dig_check.expected_address
     }
-    assign where host.vars.dig_lookup
+    display_name = "dig localhost ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
+    assign where host.vars.dig_checks
+}
+
+apply Service "dig_cloudflare" for (dig_cloudflare_check in host.vars.dig_cloudflare_checks) {
+    check_command = "dig"
+
+    vars.dig_server = "2606:4700:4700::1111"
+
+    if (dig_cloudflare_check.lookup) {
+        vars.dig_lookup = dig_cloudflare_check.lookup
+    } else {
+        vars.dig_lookup = host.name
+    }
+    if (dig_cloudflare_check.record_type) {
+        vars.dig_record_type = dig_cloudflare_check.record_type
+    } else {
+        vars.dig_record_type = "AAAA"
+    }
+    if (dig_cloudflare_check.expected_address) {
+        vars.dig_expected_address = dig_cloudflare_check.expected_address
+    }
+    display_name = "dig cloudflare ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
+    assign where host.vars.dig_cloudflare_checks
+}
+
+apply Service "dig_google" for (dig_google_check in host.vars.dig_google_checks) {
+    check_command = "dig"
+
+    vars.dig_server = "2001:4860:4860::8888"
+
+    if (dig_google_check.lookup) {
+        vars.dig_lookup = dig_google_check.lookup
+    } else {
+        vars.dig_lookup = host.name
+    }
+    if (dig_google_check.record_type) {
+        vars.dig_record_type = dig_google_check.record_type
+    } else {
+        vars.dig_record_type = "AAAA"
+    }
+    if (dig_google_check.expected_address) {
+        vars.dig_expected_address = dig_google_check.expected_address
+    }
+    display_name = "dig google ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
+    assign where host.vars.dig_google_checks
 }

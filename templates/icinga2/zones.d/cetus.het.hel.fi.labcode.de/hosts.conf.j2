@@ -11,8 +11,13 @@ object Host "cetus.het.hel.fi.labcode.de" {
     vars.imaps_address = "$address$"
     vars.imaps_port = "993"
 
-    vars.dig_lookup = name
-    vars.dig_expected_address = "2a01:4f9:c010:1dcf::1"
+    vars.dig_checks = [{
+        "expected_address" = "2a01:4f9:c010:1dcf::1"
+    }]
+    vars.dig_cloudflare_checks = [{
+        "expected_address" = "2a01:4f9:c010:1dcf::1"
+    }]
+    vars.dig_google_checks = vars.dig_cloudflare_checks
 
     vars.ssl_cert_checks = [{
         "port" = "993",

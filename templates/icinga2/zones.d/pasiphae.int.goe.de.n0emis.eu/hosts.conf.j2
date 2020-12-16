@@ -4,4 +4,10 @@ object Host "pasiphae.int.goe.de.n0emis.eu" {
     vars.os_type = "Debian"
 
     vars.check_load = false
+
+    vars.dig_cloudflare_checks = [{
+        "expected_address" = "2001:470:7694:0:8c85:c2ff:fe81:9ed9"
+    }, {
+        "record_type" = "A"
+    }]
 }
