@@ -15,12 +15,12 @@ object Host "ganymed.het.hel.fi.n0emis.eu" {
     vars.ssl_cert_checks = [{
         "port" = "993",
         "protocol" = "imaps",
-        "cn" = ["ganymed.het.hel.fi.n0emis.eu", "mail.n0emis.eu", "mail.desti.io"],
+        "cn" = ["ganymed.het.hel.fi.n0emis.eu", "mail.n0emis.eu"],
         "altnames" = true
     }, {
         "port" = "465",
         "protocol" = "smtps",
-        "cn" = ["ganymed.het.hel.fi.n0emis.eu", "mail.n0emis.eu", "mail.desti.io"],
+        "cn" = ["ganymed.het.hel.fi.n0emis.eu", "mail.n0emis.eu"],
         "altnames" = true
     }]
 }
