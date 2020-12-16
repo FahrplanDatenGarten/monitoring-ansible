@@ -11,4 +11,16 @@ object Host "ganymed.het.hel.fi.n0emis.eu" {
 
     vars.dig_lookup = name
     vars.dig_expected_address = "2a01:4f9:c010:7b6e::1"
+
+    vars.ssl_cert_checks = [{
+        "port" = "993",
+        "protocol" = "imaps",
+        "cn" = ["ganymed.het.hel.fi.n0emis.eu", "mail.n0emis.eu", "mail.desti.io"],
+        "altnames" = true
+    }, {
+        "port" = "465",
+        "protocol" = "smtps",
+        "cn" = ["ganymed.het.hel.fi.n0emis.eu", "mail.n0emis.eu", "mail.desti.io"],
+        "altnames" = true
+    }]
 }
