@@ -193,6 +193,8 @@ apply Service "zfs" {
 apply Service "dig" for (dig_check in host.vars.dig_checks) {
     check_command = "dig"
 
+    check_interval = 10s
+
     if (dig_check.lookup) {
         vars.dig_lookup = dig_check.lookup
     } else {
