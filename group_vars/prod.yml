@@ -60,6 +60,34 @@ icinga2_zones:
     endpoints:
       - tethys.int.sig.de.labcode.de
     parent: primary
+  dione.int.sig.de.labcode.de:
+    endpoints:
+      - dione.int.sig.de.labcode.de
+    parent: tethys.int.sig.de.labcode.de
+  titan.int.sig.de.labcode.de:
+    endpoints:
+      - titan.int.sig.de.labcode.de
+    parent: tethys.int.sig.de.labcode.de
+  rhea.int.sig.de.labcode.de:
+    endpoints:
+      - rhea.int.sig.de.labcode.de
+    parent: tethys.int.sig.de.labcode.de
+  hyperion.int.sig.de.labcode.de:
+    endpoints:
+      - hyperion.int.sig.de.labcode.de
+    parent: tethys.int.sig.de.labcode.de
+  phoebe.int.sig.de.labcode.de:
+    endpoints:
+      - phoebe.int.sig.de.labcode.de
+    parent: tethys.int.sig.de.labcode.de
+  dns.int.sig.de.labcode.de:
+    endpoints:
+      - dns.int.sig.de.labcode.de
+    parent: tethys.int.sig.de.labcode.de
+  helene.int.sig.de.labcode.de:
+    endpoints:
+      - helene.int.sig.de.labcode.de
+    parent: tethys.int.sig.de.labcode.de
 
 icinga2_endpoints:
   neso.het.fks.de.fahrplandatengarten.de:
@@ -81,6 +109,13 @@ icinga2_endpoints:
   cetus.het.hel.fi.labcode.de: {}
   janus.ion.rhr.de.labcode.de: {}
   tethys.int.sig.de.labcode.de: {}
+  dione.int.sig.de.labcode.de: {}
+  titan.int.sig.de.labcode.de: {}
+  rhea.int.sig.de.labcode.de: {}
+  hyperion.int.sig.de.labcode.de: {}
+  phoebe.int.sig.de.labcode.de: {}
+  dns.int.sig.de.labcode.de: {}
+  helene.int.sig.de.labcode.de: {}
 
 traefik_tls_block: |
   tls:

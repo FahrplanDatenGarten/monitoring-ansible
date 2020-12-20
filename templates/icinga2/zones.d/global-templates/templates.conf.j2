@@ -34,6 +34,18 @@ template Host "agent-host" {
     vars.check_load = true
 }
 
+template Host "lxc-agent-host" {
+    import "agent-host"
+
+    vars.agent_endpoint = address
+
+    vars.check_disk = true
+    vars.check_apt = true
+    vars.check_load = false
+    vars.check_ping4 = false
+    vars.check_ping6 = false
+}
+
 /**
  * Provides default settings for services. By convention
  * all services should import this template.

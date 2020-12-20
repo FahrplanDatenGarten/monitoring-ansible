@@ -1,0 +1,8 @@
+apply Dependency "virtualized" to Host {
+  parent_host_name = host.vars.virtualization_parent
+  disable_checks = true
+
+  child_host_name = host.name
+
+  assign where host.vars.virtualization_parent != ""
+}
