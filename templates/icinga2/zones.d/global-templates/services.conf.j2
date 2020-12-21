@@ -95,6 +95,8 @@ apply Service "memory" {
 apply Service "celery" {
   check_command = "celery"
 
+  command_endpoint = host.vars.agent_endpoint
+
   assign where host.vars.celery_broker
 }
 
@@ -117,6 +119,8 @@ apply Service "http" for (http_check in host.vars.http_checks) {
 apply Service "smtps" {
   check_command = "ssmtp"
 
+  command_endpoint = host.vars.agent_endpoint
+
   vars.ssmtp_address = host.vars.smtps_address
   vars.ssmtp_port = host.vars.smtps_port
 
@@ -127,6 +131,8 @@ apply Service "smtps" {
 
 apply Service "ssl_cert" for (ssl_cert_check in host.vars.ssl_cert_checks) {
   check_command = "ssl_cert"
+
+  command_endpoint = host.vars.agent_endpoint
 
   vars.ssl_cert_protocol = ssl_cert_check.protocol
   vars.ssl_cert_critical = 7
@@ -160,6 +166,8 @@ apply Service "ssl_cert" for (ssl_cert_check in host.vars.ssl_cert_checks) {
 apply Service "imaps" {
   check_command = "imap"
 
+  command_endpoint = host.vars.agent_endpoint
+
   vars.imap_address = host.vars.imaps_address
   vars.imap_port = host.vars.imaps_port
   vars.imap_ssl = true
@@ -172,6 +180,8 @@ apply Service "imaps" {
 apply Service "apt" {
     check_command = "apt"
 
+    command_endpoint = host.vars.agent_endpoint
+
     vars.apt_list = true
     vars.apt_critical = "^[^\\(]*\\([^ ]* (Debian-Security:|Ubuntu:[^/]*/[^-]*-security)"
 
@@ -180,6 +190,8 @@ apply Service "apt" {
 
 apply Service "zfs" {
     check_command = "zfs"
+
+    command_endpoint = host.vars.agent_endpoint
 
     vars.capacity_warning = 70
     vars.capacity_critical = 80
@@ -192,6 +204,9 @@ apply Service "zfs" {
 
 apply Service "dig" for (dig_check in host.vars.dig_checks) {
     check_command = "dig"
+    command_endpoint = host.vars.agent_endpoint
+
+    command_endpoint = host.vars.agent_endpoint
 
     check_interval = 10s
 
@@ -215,6 +230,8 @@ apply Service "dig" for (dig_check in host.vars.dig_checks) {
 apply Service "dig_cloudflare" for (dig_cloudflare_check in host.vars.dig_cloudflare_checks) {
     check_command = "dig"
 
+    command_endpoint = host.vars.agent_endpoint
+
     vars.dig_server = "2606:4700:4700::1111"
 
     if (dig_cloudflare_check.lookup) {
@@ -237,6 +254,8 @@ apply Service "dig_cloudflare" for (dig_cloudflare_check in host.vars.dig_cloudf
 apply Service "dig_google" for (dig_google_check in host.vars.dig_google_checks) {
     check_command = "dig"
 
+    command_endpoint = host.vars.agent_endpoint
+
     vars.dig_server = "2001:4860:4860::8888"
 
     if (dig_google_check.lookup) {
@@ -254,4 +273,25 @@ apply Service "dig_google" for (dig_google_check in host.vars.dig_google_checks)
     }
     display_name = "dig google ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
     assign where host.vars.dig_google_checks
+}
+
+apply Service "postgres_connection" {
+    check_command = "postgres"
+
+    command_endpoint = host.vars.agent_endpoint
+
+    if (host.vars.postgres_hostname) {
+        vars.postgres_hostname = host.vars.postgres_hostname
+    }
+
+    if (host.vars.postgres_unixsocket) {
+        vars.postgres_unixsocket = host.vars.postgres_unixsocket
+    }
+
+    vars.postgres_dbname = "template1"
+    vars.postgres_dbuser = "nagios"
+
+    vars.postgres_action = "connection"
+
+    assign where host.vars.check_postgres_connection
 }
