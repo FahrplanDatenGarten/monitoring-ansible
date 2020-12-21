@@ -1,0 +1,10 @@
+
+object Host "rhea.int.sig.de.labcode.de" {
+    import "lxc-agent-host"
+
+    vars.virtualization_parent = "tethys.int.sig.de.labcode.de"
+    vars.os_type = "Debian"
+
+    vars.check_postgres_connection = true
+    vars.postgres_unixsocket = true
+}

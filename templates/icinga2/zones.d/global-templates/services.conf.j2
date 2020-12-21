@@ -255,3 +255,22 @@ apply Service "dig_google" for (dig_google_check in host.vars.dig_google_checks)
     display_name = "dig google ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
     assign where host.vars.dig_google_checks
 }
+
+apply Service "postgres_connection" {
+    check_command = "postgres"
+
+    if (host.vars.postgres_hostname) {
+        vars.postgres_hostname = host.vars.postgres_hostname
+    }
+
+    if (host.vars.postgres_unixsocket) {
+        vars.postgres_unixsocket = host.vars.postgres_unixsocket
+    }
+
+    vars.postgres_dbname = "template1"
+    vars.postgres_dbuser = "nagios"
+
+    vars.postgres_action = "connection"
+
+    assign where host.vars.check_postgres_connection
+}
