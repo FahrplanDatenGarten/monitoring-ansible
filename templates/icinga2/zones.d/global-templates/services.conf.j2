@@ -55,27 +55,25 @@ apply Service "ping6" {
 
 
 apply Service "disk" {
-    check_command = "disk"
+    import "generic-agent-service"
 
-    // Check is executed on the remote command endpoint
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "disk"
 
     assign where host.vars.agent_endpoint && host.vars.check_disk == true
 }
 
 apply Service "load" {
-    check_command = "load"
+    import "generic-agent-service"
 
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "load"
 
     assign where host.vars.agent_endpoint && host.vars.check_load == true
 }
 
 apply Service "memory" {
-    check_command = "mem"
+    import "generic-agent-service"
 
-    // Check is executed on the remote command endpoint
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "mem"
 
     vars.mem_used = true
 
@@ -93,94 +91,95 @@ apply Service "memory" {
 }
 
 apply Service "celery" {
-  check_command = "celery"
+    import "generic-agent-service"
 
-  command_endpoint = host.vars.agent_endpoint
+    check_command = "celery"
 
-  assign where host.vars.celery_broker
+    assign where host.vars.celery_broker
 }
 
 apply Service "http" for (http_check in host.vars.http_checks) {
-  check_command = "http"
+    import "generic-service"
 
-  vars.http_address = http_check.address
-  vars.http_vhost = http_check.vhost
-  vars.http_url = http_check.url
-  vars.http_ssl = true
-  vars.http_sni = true
+    check_command = "http"
 
-  display_name = "http (" + vars.http_vhost + vars.http_url + ")"
+    vars.http_address = http_check.address
+    vars.http_vhost = http_check.vhost
+    vars.http_url = http_check.url
+    vars.http_ssl = true
+    vars.http_sni = true
 
-  zone = "primary"
+    display_name = "http (" + vars.http_vhost + vars.http_url + ")"
 
-  assign where host.vars.http_checks
+    zone = "primary"
+
+    assign where host.vars.http_checks
 }
 
 apply Service "smtps" {
-  check_command = "ssmtp"
+    import "generic-service"
 
-  command_endpoint = host.vars.agent_endpoint
+    check_command = "ssmtp"
 
-  vars.ssmtp_address = host.vars.smtps_address
-  vars.ssmtp_port = host.vars.smtps_port
+    vars.ssmtp_address = host.vars.smtps_address
+    vars.ssmtp_port = host.vars.smtps_port
 
-  zone = "primary"
+    zone = "primary"
 
-  assign where host.vars.smtps_address
+    assign where host.vars.smtps_address
 }
 
 apply Service "ssl_cert" for (ssl_cert_check in host.vars.ssl_cert_checks) {
-  check_command = "ssl_cert"
+    import "generic-agent-service"
 
-  command_endpoint = host.vars.agent_endpoint
+    check_command = "ssl_cert"
 
-  vars.ssl_cert_protocol = ssl_cert_check.protocol
-  vars.ssl_cert_critical = 7
-  vars.ssl_cert_warn = 14
+    vars.ssl_cert_protocol = ssl_cert_check.protocol
+    vars.ssl_cert_critical = 7
+    vars.ssl_cert_warn = 14
 
-  if (ssl_cert_check.address) {
-    vars.ssl_cert_address = ssl_cert_check.address
-  } else {
-    vars.ssl_cert_address = host.name
-  }
-  if (ssl_cert_check.port) {
-    vars.ssl_cert_port = ssl_cert_check.port
-  }
-  if (ssl_cert_check.cn) {
-    vars.ssl_cert_cn = ssl_cert_check.cn
-  }
-  if (ssl_cert_check.altnames) {
-    vars.ssl_cert_altnames = ssl_cert_check.altnames
-  }
-  if (ssl_cert_check.sni) {
-    vars.ssl_cert_sni = ssl_cert_check.sni
-    display_name = "ssl cert ( " + vars.ssl_cert_sni + " - " + vars.ssl_cert_protocol  + "(" + vars.ssl_cert_port + ") )"
-  } else {
-    display_name = "ssl cert ( " + vars.ssl_cert_address + " - " + vars.ssl_cert_protocol  + "(" + vars.ssl_cert_port + ") )"
-  }
+    if (ssl_cert_check.address) {
+        vars.ssl_cert_address = ssl_cert_check.address
+    } else {
+        vars.ssl_cert_address = host.name
+    }
+    if (ssl_cert_check.port) {
+        vars.ssl_cert_port = ssl_cert_check.port
+    }
+    if (ssl_cert_check.cn) {
+        vars.ssl_cert_cn = ssl_cert_check.cn
+    }
+    if (ssl_cert_check.altnames) {
+        vars.ssl_cert_altnames = ssl_cert_check.altnames
+    }
+    if (ssl_cert_check.sni) {
+        vars.ssl_cert_sni = ssl_cert_check.sni
+        display_name = "ssl cert ( " + vars.ssl_cert_sni + " - " + vars.ssl_cert_protocol  + "(" + vars.ssl_cert_port + ") )"
+    } else {
+        display_name = "ssl cert ( " + vars.ssl_cert_address + " - " + vars.ssl_cert_protocol  + "(" + vars.ssl_cert_port + ") )"
+    }
 
-
-  assign where host.vars.ssl_cert_checks
+    assign where host.vars.ssl_cert_checks
 }
 
 apply Service "imaps" {
-  check_command = "imap"
+    import "generic-service"
 
-  command_endpoint = host.vars.agent_endpoint
+    check_command = "imap"
 
-  vars.imap_address = host.vars.imaps_address
-  vars.imap_port = host.vars.imaps_port
-  vars.imap_ssl = true
+    vars.imap_address = host.vars.imaps_address
+    vars.imap_port = host.vars.imaps_port
+    vars.imap_ssl = true
 
-  zone = "primary"
+    zone = "primary"
 
-  assign where host.vars.imaps_address
+    assign where host.vars.imaps_address
 }
 
 apply Service "apt" {
-    check_command = "apt"
+    import "generic-agent-service"
 
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "apt"
 
     vars.apt_list = true
     vars.apt_critical = "^[^\\(]*\\([^ ]* (Debian-Security:|Ubuntu:[^/]*/[^-]*-security)"
@@ -189,9 +188,9 @@ apply Service "apt" {
 }
 
 apply Service "zfs" {
-    check_command = "zfs"
+    import "generic-agent-service"
 
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "zfs"
 
     vars.capacity_warning = 70
     vars.capacity_critical = 80
@@ -203,10 +202,9 @@ apply Service "zfs" {
 }
 
 apply Service "dig" for (dig_check in host.vars.dig_checks) {
-    check_command = "dig"
-    command_endpoint = host.vars.agent_endpoint
+    import "generic-agent-service"
 
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "dig"
 
     check_interval = 10s
 
@@ -224,13 +222,14 @@ apply Service "dig" for (dig_check in host.vars.dig_checks) {
         vars.dig_expected_address = dig_check.expected_address
     }
     display_name = "dig localhost ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
+
     assign where host.vars.dig_checks
 }
 
 apply Service "dig_cloudflare" for (dig_cloudflare_check in host.vars.dig_cloudflare_checks) {
-    check_command = "dig"
+    import "generic-agent-service"
 
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "dig"
 
     vars.dig_server = "2606:4700:4700::1111"
 
@@ -252,9 +251,9 @@ apply Service "dig_cloudflare" for (dig_cloudflare_check in host.vars.dig_cloudf
 }
 
 apply Service "dig_google" for (dig_google_check in host.vars.dig_google_checks) {
-    check_command = "dig"
+    import "generic-agent-service"
 
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "dig"
 
     vars.dig_server = "2001:4860:4860::8888"
 
@@ -276,9 +275,9 @@ apply Service "dig_google" for (dig_google_check in host.vars.dig_google_checks)
 }
 
 apply Service "postgres_connection" {
-    check_command = "postgres"
+    import "generic-agent-service"
 
-    command_endpoint = host.vars.agent_endpoint
+    check_command = "postgres"
 
     if (host.vars.postgres_hostname) {
         vars.postgres_hostname = host.vars.postgres_hostname
