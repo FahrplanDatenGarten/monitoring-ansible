@@ -6,7 +6,7 @@ object ApiListener "api" {
 {% if ansible_fqdn == icinga2_primary_config_endpoint %}
   accept_config = false
 {% else %}
-  accept_config = true
+  accept_config = false
 {% endif %}
   accept_commands = true
 
