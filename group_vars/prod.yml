@@ -38,15 +38,15 @@ icinga2_zones:
   sinope.int.goe.de.n0emis.eu:
     endpoints:
       - sinope.int.goe.de.n0emis.eu
-    parent: primary
+    parent: kallisto.int.goe.de.n0emis.eu
   metis.int.goe.de.n0emis.eu:
     endpoints:
       - metis.int.goe.de.n0emis.eu
-    parent: primary
+    parent: kallisto.int.goe.de.n0emis.eu
   pasiphae.int.goe.de.n0emis.eu:
     endpoints:
       - pasiphae.int.goe.de.n0emis.eu
-    parent: primary
+    parent: kallisto.int.goe.de.n0emis.eu
 # em0lar
   cetus.het.hel.fi.labcode.de:
     endpoints:
