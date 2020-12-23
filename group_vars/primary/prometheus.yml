@@ -64,3 +64,10 @@ prometheus_scrape_configs:
         - "ns.n0emis.eu:8082"
         - "ns2.n0emis.eu:8082"
         - "ns3.n0emis.eu:8082"
+  - job_name: openwrt
+    metrics_path: "/metrics"
+    scheme: https
+    basic_auth: "{{ openwrt_metrics_basic_auth }}"
+    static_configs:
+      - targets:
+        - "atlas.int.sig.de.labcode.de"
