@@ -71,3 +71,4 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
         - "atlas.int.sig.de.labcode.de"
+        - "io-metrics.int.goe.de.n0emis.eu"
