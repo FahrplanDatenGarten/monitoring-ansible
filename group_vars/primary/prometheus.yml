@@ -27,7 +27,6 @@ prometheus_scrape_configs:
     scheme: https
     static_configs:
       - targets:
-        - "dione.int.sig.de.labcode.de"
         - "mars.het.nue.de.fahrplandatengarten.de"
         - "elara.het.nue.de.n0emis.eu"
         - "sinope.int.goe.de.n0emis.eu"
@@ -72,3 +71,10 @@ prometheus_scrape_configs:
       - targets:
         - "atlas.int.sig.de.labcode.de"
         - "io-metrics.int.goe.de.n0emis.eu"
+  - job_name: caddy
+    metrics_path: "/metrics"
+    scheme: https
+    basic_auth: "{{ caddy_metrics_basic_auth }}"
+    static_configs:
+      - targets:
+          - "titan.int.sig.de.labcode.de"
