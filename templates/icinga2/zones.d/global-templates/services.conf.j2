@@ -294,3 +294,14 @@ apply Service "postgres_connection" {
 
     assign where host.vars.check_postgres_connection
 }
+
+apply Service "last b2 upload" {
+    import "generic-agent-service"
+
+    check_command = "last_run"
+
+    vars.last_run_datefile = host.vars.b2_upload_datefile
+    vars.last_run_max_hours = host.vars.b2_upload_max_hours
+
+    assign where host.vars.b2_upload_datefile && host.vars.b2_upload_max_hours
+}

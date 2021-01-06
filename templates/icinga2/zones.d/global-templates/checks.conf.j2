@@ -46,3 +46,18 @@ object CheckCommand "zfs" {
     }
   }
 }
+
+object CheckCommand "last_run" {
+  command = [ "{{ icinga2_fdg_custom_plugin_directory }}/check_last_run.sh" ]
+  arguments = {
+    "-d" = {
+      value = "$last_run_datefile$"
+      description = "Path to the file containg the date"
+      required = true
+    }
+    "-h" = {
+      value = "$last_run_max_hours$"
+      description = "Number of workers that should exist (less results in warning status)"
+    }
+  }
+}
