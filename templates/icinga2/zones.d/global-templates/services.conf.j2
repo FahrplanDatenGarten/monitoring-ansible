@@ -98,22 +98,20 @@ apply Service "celery" {
     assign where host.vars.celery_broker
 }
 
-apply Service "http" for (http_check in host.vars.http_checks) {
+apply Service "http_vhost_" for (key => config in host.vars.http_vhosts) {
     import "generic-service"
 
     check_command = "http"
 
-    vars.http_address = http_check.address
-    vars.http_vhost = http_check.vhost
-    vars.http_url = http_check.url
+    vars.http_address = config.address
+    vars.http_vhost = config.vhost
+    vars.http_url = config.url
     vars.http_ssl = true
     vars.http_sni = true
 
-    display_name = "http (" + vars.http_vhost + vars.http_url + ")"
-
     zone = "primary"
 
-    assign where host.vars.http_checks
+    assign where host.vars.http_vhosts
 }
 
 apply Service "smtps" {
@@ -129,34 +127,31 @@ apply Service "smtps" {
     assign where host.vars.smtps_address
 }
 
-apply Service "ssl_cert" for (ssl_cert_check in host.vars.ssl_cert_checks) {
+apply Service "ssl_cert_" for (key => config in host.vars.ssl_cert_checks) {
     import "generic-agent-service"
 
     check_command = "ssl_cert"
 
-    vars.ssl_cert_protocol = ssl_cert_check.protocol
+    vars.ssl_cert_protocol = config.protocol
     vars.ssl_cert_critical = 7
     vars.ssl_cert_warn = 14
 
-    if (ssl_cert_check.address) {
-        vars.ssl_cert_address = ssl_cert_check.address
+    if (config.address) {
+        vars.ssl_cert_address = config.address
     } else {
         vars.ssl_cert_address = host.name
     }
-    if (ssl_cert_check.port) {
-        vars.ssl_cert_port = ssl_cert_check.port
+    if (config.port) {
+        vars.ssl_cert_port = config.port
     }
-    if (ssl_cert_check.cn) {
-        vars.ssl_cert_cn = ssl_cert_check.cn
+    if (config.cn) {
+        vars.ssl_cert_cn = config.cn
     }
-    if (ssl_cert_check.altnames) {
-        vars.ssl_cert_altnames = ssl_cert_check.altnames
+    if (config.altnames) {
+        vars.ssl_cert_altnames = config.altnames
     }
-    if (ssl_cert_check.sni) {
-        vars.ssl_cert_sni = ssl_cert_check.sni
-        display_name = "ssl cert ( " + vars.ssl_cert_sni + " - " + vars.ssl_cert_protocol  + "(" + vars.ssl_cert_port + ") )"
-    } else {
-        display_name = "ssl cert ( " + vars.ssl_cert_address + " - " + vars.ssl_cert_protocol  + "(" + vars.ssl_cert_port + ") )"
+    if (config.sni) {
+        vars.ssl_cert_sni = config.sni
     }
 
     assign where host.vars.ssl_cert_checks
@@ -201,76 +196,73 @@ apply Service "zfs" {
     assign where host.vars.zpool
 }
 
-apply Service "dig" for (dig_check in host.vars.dig_checks) {
+apply Service "dig_" for (key => config in host.vars.dig_checks) {
     import "generic-agent-service"
 
     check_command = "dig"
 
     check_interval = 10s
 
-    if (dig_check.lookup) {
-        vars.dig_lookup = dig_check.lookup
+    if (config.lookup) {
+        vars.dig_lookup = config.lookup
     } else {
         vars.dig_lookup = host.name
     }
-    if (dig_check.record_type) {
-        vars.dig_record_type = dig_check.record_type
+    if (config.record_type) {
+        vars.dig_record_type = config.record_type
     } else {
         vars.dig_record_type = "AAAA"
     }
-    if (dig_check.expected_address) {
-        vars.dig_expected_address = dig_check.expected_address
+    if (config.expected_address) {
+        vars.dig_expected_address = config.expected_address
     }
-    display_name = "dig localhost ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
 
-    assign where host.vars.dig_checks
+    assign where host.vars.configs
 }
 
-apply Service "dig_cloudflare" for (dig_cloudflare_check in host.vars.dig_cloudflare_checks) {
+apply Service "dig_cloudflare_" for (key => config in host.vars.dig_cloudflare_checks) {
     import "generic-agent-service"
 
     check_command = "dig"
 
     vars.dig_server = "2606:4700:4700::1111"
 
-    if (dig_cloudflare_check.lookup) {
-        vars.dig_lookup = dig_cloudflare_check.lookup
+    if (config.lookup) {
+        vars.dig_lookup = config.lookup
     } else {
         vars.dig_lookup = host.name
     }
-    if (dig_cloudflare_check.record_type) {
-        vars.dig_record_type = dig_cloudflare_check.record_type
+    if (config.record_type) {
+        vars.dig_record_type = config.record_type
     } else {
         vars.dig_record_type = "AAAA"
     }
-    if (dig_cloudflare_check.expected_address) {
-        vars.dig_expected_address = dig_cloudflare_check.expected_address
+    if (config.expected_address) {
+        vars.dig_expected_address = config.expected_address
     }
-    display_name = "dig cloudflare ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
     assign where host.vars.dig_cloudflare_checks
 }
 
-apply Service "dig_google" for (dig_google_check in host.vars.dig_google_checks) {
+apply Service "dig_google_" for (key => config in host.vars.dig_google_checks) {
     import "generic-agent-service"
 
     check_command = "dig"
 
     vars.dig_server = "2001:4860:4860::8888"
 
-    if (dig_google_check.lookup) {
-        vars.dig_lookup = dig_google_check.lookup
+    if (config.lookup) {
+        vars.dig_lookup = config.lookup
     } else {
         vars.dig_lookup = host.name
     }
-    if (dig_google_check.record_type) {
-        vars.dig_record_type = dig_google_check.record_type
+    if (config.record_type) {
+        vars.dig_record_type = config.record_type
     } else {
         vars.dig_record_type = "AAAA"
     }
-    if (dig_google_check.expected_address) {
-        vars.dig_expected_address = dig_google_check.expected_address
+    if (config.expected_address) {
+        vars.dig_expected_address = config.expected_address
     }
-    display_name = "dig google ( " + vars.dig_lookup + " - " + vars.dig_record_type + " )"
     assign where host.vars.dig_google_checks
 }
 

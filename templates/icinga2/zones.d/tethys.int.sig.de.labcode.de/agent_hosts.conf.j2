@@ -3,6 +3,28 @@ object Host "titan.int.sig.de.labcode.de" {
 
     vars.virtualization_parent = "tethys.int.sig.de.labcode.de"
     vars.os_type = "Debian"
+
+    vars.http_vhosts = {
+        "web" = {
+            "address" = "$address$",
+            "vhost" = "labcode.de",
+            "url" = "/"
+        }
+        "matrix" = {
+            "address" = "$address$",
+            "vhost" = "matrix.labcode.de",
+            "url" = "/"
+        }
+    }
+
+    vars.dig_cloudflare_checks = {
+        "local" = {
+            "expected_address" = "2001:470:7285:2:3caa:14ff:fea6:7c0b"
+        }
+        "local_a" = {
+            "record_type" = "A"
+        }
+    }
 }
 
 object Host "rhea.int.sig.de.labcode.de" {

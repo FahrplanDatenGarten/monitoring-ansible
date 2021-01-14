@@ -7,17 +7,23 @@ object Host "mars.het.nue.de.fahrplandatengarten.de" {
     vars.celery_warning = 5
     vars.celery_critical = 2
 
-    vars.http_checks = [{
-        "address" = "$address$",
-        "vhost" = "fahrplandatengarten.de",
-        "url" = "/verspaeti"
-    }]
+    vars.http_vhosts = {
+        "web" = {
+            "address" = "$address$",
+            "vhost" = "fahrplandatengarten.de",
+            "url" = "/verspaeti"
+        }
+    }
 
-    vars.dig_checks = [{
-        "expected_address" = "2a01:4f8:c0c:c683::1"
-    }]
-    vars.dig_cloudflare_checks = [{
-        "expected_address" = "2a01:4f8:c0c:c683::1"
-    }]
+    vars.dig_checks = {
+        "local" = {
+            "expected_address" = "2a01:4f8:c0c:c683::1"
+        }
+    }
+    vars.dig_cloudflare_checks = {
+        "local" = {
+            "expected_address" = "2a01:4f8:c0c:c683::1"
+        }
+    }
     vars.dig_google_checks = vars.dig_cloudflare_checks
 }
