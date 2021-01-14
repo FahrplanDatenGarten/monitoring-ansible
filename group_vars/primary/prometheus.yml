@@ -77,4 +77,5 @@ prometheus_scrape_configs:
     basic_auth: "{{ caddy_metrics_basic_auth }}"
     static_configs:
       - targets:
-          - "titan.int.sig.de.labcode.de"
+        - "titan.int.sig.de.labcode.de"
+        - "pasiphae.int.goe.de.n0emis.eu"

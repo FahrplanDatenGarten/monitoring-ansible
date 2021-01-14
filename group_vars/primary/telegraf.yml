@@ -14,6 +14,14 @@ telegraf_plugins_default:
             "https://demo.codimd.org/status",
             "https://md.em0lar.de/status",
           ]
+  - plugin: httpjson
+    config:
+      - 'name_override = "covid19-vaccination"'
+      - 'method = "GET"'
+      - |
+          servers = [
+            "https://rki-vaccination-data.vercel.app/api",
+          ]
 
 telegraf_agent_output:
   - type: prometheus_client
