@@ -28,7 +28,6 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
         - "mars.het.nue.de.fahrplandatengarten.de"
-        - "elara.het.nue.de.n0emis.eu"
         - "sinope.int.goe.de.n0emis.eu"
   - job_name: "keycloak"
     metrics_path: "/auth/realms/master/metrics"
@@ -79,3 +78,4 @@ prometheus_scrape_configs:
       - targets:
         - "titan.int.sig.de.labcode.de"
         - "pasiphae.int.goe.de.n0emis.eu"
+        - "elara.het.nue.de.n0emis.eu"
