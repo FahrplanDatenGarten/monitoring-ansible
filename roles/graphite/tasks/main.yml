@@ -15,6 +15,7 @@
   loop:
     - carbon.conf # TODO: Modify this!!!
     - storage-schemas.conf
+    - storage-aggregation.conf
   notify:
     - restart carbon-cache
     - restart carbon-relay
