@@ -4,6 +4,8 @@ object Host "titan.int.sig.de.labcode.de" {
     vars.virtualization_parent = "tethys.int.sig.de.labcode.de"
     vars.os_type = "Debian"
 
+    vars.borgmatic_backup_max_hours = 26
+
     vars.http_vhosts = {
         "web" = {
             "address" = "$address$",
@@ -32,6 +34,7 @@ object Host "rhea.int.sig.de.labcode.de" {
 
     vars.virtualization_parent = "tethys.int.sig.de.labcode.de"
     vars.os_type = "Debian"
+    vars.borgmatic_backup_max_hours = 26
 
     vars.check_postgres_connection = true
     vars.postgres_unixsocket = true
@@ -42,6 +45,7 @@ object Host "hyperion.int.sig.de.labcode.de" {
 
     vars.virtualization_parent = "tethys.int.sig.de.labcode.de"
     vars.os_type = "Debian"
+    vars.borgmatic_backup_max_hours = 26
 }
 
 object Host "phoebe.int.sig.de.labcode.de" {
@@ -49,6 +53,7 @@ object Host "phoebe.int.sig.de.labcode.de" {
 
     vars.virtualization_parent = "tethys.int.sig.de.labcode.de"
     vars.os_type = "Debian"
+    vars.borgmatic_backup_max_hours = 26
 }
 
 object Host "dns.int.sig.de.labcode.de" {
@@ -56,6 +61,7 @@ object Host "dns.int.sig.de.labcode.de" {
 
     vars.virtualization_parent = "tethys.int.sig.de.labcode.de"
     vars.os_type = "Debian"
+    vars.borgmatic_backup_max_hours = 26
 }
 
 object Host "helene.int.sig.de.labcode.de" {

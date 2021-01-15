@@ -57,7 +57,17 @@ object CheckCommand "last_run" {
     }
     "-h" = {
       value = "$last_run_max_hours$"
-      description = "Number of workers that should exist (less results in warning status)"
+      description = "Maximum time in hours since last run"
+    }
+  }
+}
+
+object CheckCommand "borgmatic_last_run" {
+  command = [ "{{ icinga2_fdg_custom_plugin_directory }}/check_borgmatic_last_run.sh" ]
+  arguments = {
+    "-h" = {
+      value = "$borgmatic_last_run_max_hours$"
+      description = "Maximum time in hours since last run"
     }
   }
 }

@@ -297,3 +297,13 @@ apply Service "last b2 upload" {
 
     assign where host.vars.b2_upload_datefile && host.vars.b2_upload_max_hours
 }
+
+apply Service "last borgmatic backup" {
+    import "generic-agent-service"
+
+    check_command = "borgmatic_last_run"
+
+    vars.borgmatic_last_run_max_hours = host.vars.borgmatic_backup_max_hours
+
+    assign where host.vars.borgmatic_backup_max_hours
+}
