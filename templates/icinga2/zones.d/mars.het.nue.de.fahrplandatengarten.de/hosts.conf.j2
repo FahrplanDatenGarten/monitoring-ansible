@@ -7,6 +7,8 @@ object Host "mars.het.nue.de.fahrplandatengarten.de" {
     vars.celery_broker = "{{ fdg_celery_broker_url }}"
     vars.celery_warning = 5
     vars.celery_critical = 2
+    vars.celery_tasks_warning = 2500
+    vars.celery_tasks_critical = 5000
 
     vars.http_vhosts = {
         "web" = {

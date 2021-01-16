@@ -98,6 +98,14 @@ apply Service "celery" {
     assign where host.vars.celery_broker
 }
 
+apply Service "celery_tasks" {
+    import "generic-agent-service"
+
+    check_command = "celery_tasks"
+
+    assign where host.vars.celery_broker
+}
+
 apply Service "http_vhost_" for (key => config in host.vars.http_vhosts) {
     import "generic-service"
 
