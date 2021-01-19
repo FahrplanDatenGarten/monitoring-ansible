@@ -304,6 +304,8 @@ apply Service "last b2 upload" {
     vars.last_run_max_hours = host.vars.b2_upload_max_hours
 
     assign where host.vars.b2_upload_datefile && host.vars.b2_upload_max_hours
+    check_interval = 30m
+    retry_interval = 5m
 }
 
 apply Service "last borgmatic backup" {
@@ -314,4 +316,6 @@ apply Service "last borgmatic backup" {
     vars.borgmatic_last_run_max_hours = host.vars.borgmatic_backup_max_hours
 
     assign where host.vars.borgmatic_backup_max_hours
+    check_interval = 30m
+    retry_interval = 5m
 }
