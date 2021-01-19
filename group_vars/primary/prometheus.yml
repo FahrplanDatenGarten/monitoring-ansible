@@ -20,8 +20,6 @@ prometheus_scrape_configs:
       - targets:
         - "matrix.noemis.me"
         - "matrix.labcode.de"
-        - "matrix.chaos.jetzt"
-        - "matrix.dev.chaos.jetzt"
   - job_name: "traefik"
     metrics_path: "/metrics/prometheus"
     scheme: https
@@ -35,8 +33,6 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
           - "auth.n0emis.eu"
-          - "sso.chaos.jetzt"
-          - "sso.dev.chaos.jetzt"
   - job_name: "telegraf"
     metrics_path: "/metrics"
     static_configs:
