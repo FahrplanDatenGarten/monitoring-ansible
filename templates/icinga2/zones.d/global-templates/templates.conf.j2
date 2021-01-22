@@ -62,6 +62,13 @@ template Service "generic-agent-service" {
     command_endpoint = host.vars.agent_endpoint
 }
 
+template Service "generic-long-interval-agent-service" {
+    import "generic-agent-service"
+
+    check_interval = 30m
+    retry_interval = 5m
+}
+
 
 /**
  * Provides default settings for users. By convention

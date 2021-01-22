@@ -55,7 +55,7 @@ apply Service "ping6" {
 
 
 apply Service "disk" {
-    import "generic-agent-service"
+    import "generic-long-interval-agent-service"
 
     check_command = "disk"
 
@@ -140,6 +140,9 @@ apply Service "ssl_cert_" for (key => config in host.vars.ssl_cert_checks) {
 
     check_command = "ssl_cert"
 
+    check_interval = 10m
+    retry_interval = 1m
+
     vars.ssl_cert_protocol = config.protocol
     vars.ssl_cert_critical = 7
     vars.ssl_cert_warn = 14
@@ -180,7 +183,7 @@ apply Service "imaps" {
 }
 
 apply Service "apt" {
-    import "generic-agent-service"
+    import "generic-long-interval-agent-service"
 
     check_command = "apt"
 
@@ -191,7 +194,7 @@ apply Service "apt" {
 }
 
 apply Service "zfs" {
-    import "generic-agent-service"
+    import "generic-long-interval-agent-service"
 
     check_command = "zfs"
 
@@ -296,7 +299,7 @@ apply Service "postgres_connection" {
 }
 
 apply Service "last b2 upload" {
-    import "generic-agent-service"
+    import "generic-long-interval-agent-service"
 
     check_command = "last_run"
 
@@ -304,18 +307,14 @@ apply Service "last b2 upload" {
     vars.last_run_max_hours = host.vars.b2_upload_max_hours
 
     assign where host.vars.b2_upload_datefile && host.vars.b2_upload_max_hours
-    check_interval = 30m
-    retry_interval = 5m
 }
 
 apply Service "last borgmatic backup" {
-    import "generic-agent-service"
+    import "generic-long-interval-agent-service"
 
     check_command = "borgmatic_last_run"
 
     vars.borgmatic_last_run_max_hours = host.vars.borgmatic_backup_max_hours
 
     assign where host.vars.borgmatic_backup_max_hours
-    check_interval = 30m
-    retry_interval = 5m
 }
