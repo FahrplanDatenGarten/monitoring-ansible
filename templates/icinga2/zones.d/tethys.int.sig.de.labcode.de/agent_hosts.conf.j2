@@ -19,12 +19,26 @@ object Host "titan.int.sig.de.labcode.de" {
         }
     }
 
-    vars.dig_cloudflare_checks = {
-        "local" = {
-            "expected_address" = "2001:470:7285:2:3caa:14ff:fea6:7c0b"
+    vars.dyndns_record_checks = {
+        "direct_v4" = {
+            "record_name" = "titan.int.sig.de.dyn.labcode.de"
+            "nameserver" = "ns.labcode.de"
+            "ipv4" = true
         }
-        "local_a" = {
-            "record_type" = "A"
+        "direct_v6" = {
+            "record_name" = "titan.int.sig.de.dyn.labcode.de"
+            "nameserver" = "ns.labcode.de"
+            "ipv6" = true
+        }
+        "external_v4" = {
+            "record_name" = "titan.int.sig.de.dyn.labcode.de"
+            "nameserver" = "dns.google.com"
+            "ipv4" = true
+        }
+        "external_v6" = {
+            "record_name" = "titan.int.sig.de.dyn.labcode.de"
+            "nameserver" = "dns.google.com"
+            "ipv6" = true
         }
     }
 }
@@ -72,4 +86,27 @@ object Host "helene.int.sig.de.labcode.de" {
 
     vars.b2_upload_max_hours = 170
     vars.b2_upload_datefile = "/tmp/last_b2_sync_labcode-backup"
+
+    vars.dyndns_record_checks = {
+        "direct_v4" = {
+            "record_name" = "helene.int.sig.de.dyn.labcode.de"
+            "nameserver" = "ns.labcode.de"
+            "ipv4" = true
+        }
+        "direct_v6" = {
+            "record_name" = "helene.int.sig.de.dyn.labcode.de"
+            "nameserver" = "ns.labcode.de"
+            "ipv6" = true
+        }
+        "external_v4" = {
+            "record_name" = "helene.int.sig.de.dyn.labcode.de"
+            "nameserver" = "dns.google.com"
+            "ipv4" = true
+        }
+        "external_v6" = {
+            "record_name" = "helene.int.sig.de.dyn.labcode.de"
+            "nameserver" = "dns.google.com"
+            "ipv6" = true
+        }
+    }
 }

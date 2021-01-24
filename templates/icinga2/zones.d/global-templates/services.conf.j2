@@ -212,7 +212,6 @@ apply Service "dig_" for (key => config in host.vars.dig_checks) {
 
     check_command = "dig"
 
-    check_interval = 10s
 
     if (config.lookup) {
         vars.dig_lookup = config.lookup
@@ -275,6 +274,28 @@ apply Service "dig_google_" for (key => config in host.vars.dig_google_checks) {
         vars.dig_expected_address = config.expected_address
     }
     assign where host.vars.dig_google_checks
+}
+
+apply Service "dyndns_record_" for (key => config in host.vars.dyndns_record_checks) {
+    import "generic-agent-service"
+
+    check_command = "dyndns_record"
+
+    retry_interval = 2m
+
+    vars.dyndns_record_nameserver = config.nameserver
+
+    if (config.record_name) {
+        vars.dyndns_record_record_name = config.record_name
+    } else {
+        vars.dyndns_record_record_name = host.name
+    }
+    if (config.ipv4) {
+        vars.dyndns_record_ipv4 = true
+    } else if (config.ipv6) {
+        vars.dyndns_record_ipv6 = true
+    }
+    assign where host.vars.dyndns_record_checks
 }
 
 apply Service "postgres_connection" {

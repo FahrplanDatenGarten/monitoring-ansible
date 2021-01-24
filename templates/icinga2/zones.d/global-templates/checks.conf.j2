@@ -78,6 +78,7 @@ object CheckCommand "last_run" {
     "-h" = {
       value = "$last_run_max_hours$"
       description = "Maximum time in hours since last run"
+      required = true
     }
   }
 }
@@ -88,6 +89,29 @@ object CheckCommand "borgmatic_last_run" {
     "-h" = {
       value = "$borgmatic_last_run_max_hours$"
       description = "Maximum time in hours since last run"
+      required = true
+    }
+  }
+}
+
+object CheckCommand "dyndns_record" {
+  command = [ "{{ icinga2_fdg_custom_plugin_directory }}/check_dyndns_record.sh" ]
+  arguments = {
+    "--nameserver" = {
+      value = "$dyndns_record_nameserver$"
+      description = "Nameserver that should be queried"
+      required = true
+    }
+    "--record" = {
+      value = "$dyndns_record_record_name$"
+      description = "Nameserver that should be queried"
+      required = true
+    }
+    "-4" = {
+      set_if = "$dyndns_record_ipv4$"
+    }
+    "-6" = {
+      set_if = "$dyndns_record_ipv6$"
     }
   }
 }
