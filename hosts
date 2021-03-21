@@ -19,7 +19,7 @@ neso.het.fks.de.fahrplandatengarten.de
 nereid.ovh.fra.de.fahrplandatengarten.de
 
 [prod_primary_prometheus]
-naiad.ncp.nue.de.fahrplandatengarten.de
+neso.het.fks.de.fahrplandatengarten.de
 
 [prod_primary:children]
 prod_primary_icinga
