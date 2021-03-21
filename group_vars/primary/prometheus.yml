@@ -26,7 +26,6 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
         - "mars.het.nue.de.fahrplandatengarten.de"
-        - "sinope.int.goe.de.n0emis.eu"
   - job_name: "keycloak"
     metrics_path: "/auth/realms/master/metrics"
     scheme: https
@@ -43,8 +42,8 @@ prometheus_scrape_configs:
     scrape_interval: "1h"
     static_configs:
       - targets:
-        - "localhost:9001"
-        - "localhost:9002"
+        - "127.0.0.1:9001"
+        - "127.0.0.1:9002"
   - job_name: minio
     bearer_token: "{{ minio_n0emis_eu_bearer }}"
     metrics_path: /minio/prometheus/metrics
@@ -76,3 +75,10 @@ prometheus_scrape_configs:
         - "titan.int.sig.de.labcode.de"
         - "pasiphae.int.goe.de.n0emis.eu"
         - "elara.het.nue.de.n0emis.eu"
+  - job_name: nextcloud
+    metrics_path: "/metrics"
+    scheme: https
+    basic_auth: "{{ caddy_metrics_basic_auth }}"
+    static_configs:
+      - targets:
+        - "wolke.n0emis.eu"

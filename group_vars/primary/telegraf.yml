@@ -13,6 +13,7 @@ telegraf_plugins_default:
             "https://md.ctfl.space/status",
             "https://demo.codimd.org/status",
             "https://md.em0lar.de/status",
+            "https://md.cccgoe.de/status",
           ]
   - plugin: httpjson
     config:
