@@ -22,9 +22,6 @@
 [submodule "roles/cloudalchemy.grafana"]
 	path = roles/cloudalchemy.grafana
 	url = https://github.com/cloudalchemy/ansible-grafana
-[submodule "roles/n0emis.wireguard"]
-	path = roles/n0emis.wireguard
-	url = https://github.com/n0emis/ansible-wireguard
 [submodule "roles/cloudalchemy.prometheus"]
 	path = roles/cloudalchemy.prometheus
 	url = https://github.com/cloudalchemy/ansible-prometheus
@@ -37,3 +34,6 @@
 [submodule "roles/jnv.unattended-upgrades"]
 	path = roles/jnv.unattended-upgrades
 	url = https://github.com/jnv/ansible-role-unattended-upgrades.git
+[submodule "roles/geerlingguy.mysql"]
+	path = roles/geerlingguy.mysql
+	url = https://github.com/geerlingguy/ansible-role-mysql

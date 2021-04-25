@@ -4,6 +4,7 @@
   register: opsgenie_check_deb
   failed_when: opsgenie_check_deb.rc > 1
   changed_when: opsgenie_check_deb.rc == 1
+  check_mode: no
 
 - name: Download opsgenie
   get_url:

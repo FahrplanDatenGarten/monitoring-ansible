@@ -1,0 +1,9 @@
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+delete: olcSyncrepl
+-
+delete: olcDbIndex
+olcDbIndex: entryUUID eq
+olcDbIndex: entryCSN eq
+-
+delete: olcMirrorMode

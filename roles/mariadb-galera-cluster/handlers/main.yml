@@ -1,6 +1,0 @@
-- name: restart mariadb
-  systemd:
-    name: "mysql.service"
-    state: restarted
-  run_once: yes
-  when: _galera_cluster_configured.stat.exists

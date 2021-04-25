@@ -1,6 +1,9 @@
 mysql_root_username: "root"
 mysql_root_password_update: false
 
+mysql_packages:
+  - mariadb-server
+
 galera_cluster_bind_address: "0.0.0.0"
 galera_wsrep_cluster_name: "monitoring-cluster"
 galera_wsrep_cluster_address: "{% for host in primary_hosts %}{{ hostvars[host].galera_wsrep_node_address }}{% if loop.index != loop.length %},{% endif %}{% endfor %}"

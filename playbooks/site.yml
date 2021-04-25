@@ -10,15 +10,7 @@
 - hosts: primary
   become: yes
   roles:
-    - n0emis.wireguard
-  tags:
-    - wireguard
-    - wg
-
-- hosts: primary
-  become: yes
-  roles:
-    - mariadb-galera-cluster
+    - geerlingguy.mysql
   tags: db
 
 - hosts: primary

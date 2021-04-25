@@ -41,8 +41,8 @@ prometheus_scrape_configs:
     scrape_interval: "1h"
     static_configs:
       - targets:
-        - "127.0.0.1:9001"
-        - "127.0.0.1:9002"
+        - "localhost:9001"
+        - "localhost:9002"
   - job_name: minio
     bearer_token: "{{ minio_n0emis_eu_bearer }}"
     metrics_path: /minio/prometheus/metrics
