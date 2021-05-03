@@ -34,19 +34,10 @@ icinga2_zones:
     endpoints:
       - sinope.int.goe.de.n0emis.eu
     parent: kallisto.int.goe.de.n0emis.eu
-  metis.int.goe.de.n0emis.eu:
-    endpoints:
-      - metis.int.goe.de.n0emis.eu
-    parent: kallisto.int.goe.de.n0emis.eu
   pasiphae.int.goe.de.n0emis.eu:
     endpoints:
       - pasiphae.int.goe.de.n0emis.eu
     parent: kallisto.int.goe.de.n0emis.eu
-# em0lar
-  cetus.het.hel.fi.labcode.de:
-    endpoints:
-      - cetus.het.hel.fi.labcode.de
-    parent: primary
 
 icinga2_endpoints:
   neso.het.fks.de.fahrplandatengarten.de:
@@ -59,10 +50,7 @@ icinga2_endpoints:
   himalia.ion.rhr.de.n0emis.eu: {}
   kallisto.int.goe.de.n0emis.eu: {}
   sinope.int.goe.de.n0emis.eu: {}
-  metis.int.goe.de.n0emis.eu: {}
   pasiphae.int.goe.de.n0emis.eu: {}
-# em0lar
-  cetus.het.hel.fi.labcode.de: {}
 
 traefik_tls_block: |
   tls:

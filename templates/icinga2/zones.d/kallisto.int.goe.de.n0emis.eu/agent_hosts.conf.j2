@@ -15,22 +15,6 @@ object Host "sinope.int.goe.de.n0emis.eu" {
     vars.dig_google_checks = vars.dig_cloudflare_checks
 }
 
-object Host "metis.int.goe.de.n0emis.eu" {
-    import "lxc-agent-host"
-
-    vars.virtualization_parent = "kallisto.int.goe.de.n0emis.eu"
-    vars.os_type = "Debian"
-
-    vars.dig_cloudflare_checks = {
-        "local" = {
-            "expected_address" = "2001:470:7694:0:ecd3:a6ff:fe81:e64d"
-        }
-        "local_a" = {
-            "record_type" = "A"
-        }
-    }
-}
-
 object Host "pasiphae.int.goe.de.n0emis.eu" {
     import "lxc-agent-host"
 
